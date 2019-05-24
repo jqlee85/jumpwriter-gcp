@@ -8,22 +8,10 @@ const firestore = new Firestore({
   projectId: 'jumpwriter'
 });
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
-// Include getCountData function
-const getCountData = require('./getCountData')
-exports.getCountData = getCountData
-
-// Take the text parameter passed to this HTTP endpoint and insert it into the
-// Realtime Database under the path /messages/:pushId/original
-exports.getPieces = functions.https.onCall((data, context) => {
+// Get Count Data for a service or services based on parameters passed in
+const getCountData = functions.https.onCall((args, context) => {
   
-  console.log('data',data)
+  console.log('args',args)
   console.log('context.auth',context.auth)
 
   // Message text passed from the client.
@@ -58,3 +46,4 @@ exports.getPieces = functions.https.onCall((data, context) => {
   }
     
 })
+export default getCountData
