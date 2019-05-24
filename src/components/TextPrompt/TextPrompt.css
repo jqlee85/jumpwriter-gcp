@@ -1,0 +1,14 @@
+.text-prompt {
+  height: 267px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-prompt h3 {
+  font-size: 2.4em;
+  font-weight: normal;
+  margin: 0;
+  color: rgba(255,255,255,1);
+  font-family: 'Geomanist', sans-serif;
+  font-weight: 500;
+}

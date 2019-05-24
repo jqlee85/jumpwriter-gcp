@@ -1,0 +1,39 @@
+/* Image Prompts */
+.image-prompt-wrapper {
+  box-sizing: border-box;
+  block-size: 267px;
+}
+.prompt-image {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: 267px;
+  border-radius: 1px;
+  background: none;
+  box-shadow: -10px 10px 40px rgba(50,50,50,.5);
+  overflow: hidden;
+}
+.prompt-image img {
+  display: block;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.prompt-image-credit {
+  position: absolute;
+  bottom: 0px;
+  padding: 5px;
+  color: rgba(255,255,255,.6);
+}
+.prompt-image-credit p {
+  margin: 0;
+  font-size: 8px;
+}
+.prompt-image-credit a {
+  color: rgba(255,255,255,.8);
+  text-decoration: none;
+}

@@ -1,0 +1,43 @@
+/* WritePage */
+.write-page {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+}
+.write-textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  min-height: 60vh;
+  background: rgba(0,0,0,.3);
+  border-radius: 8px;
+  border: none;
+  box-shadow: -20px 20px 80px rgba(0,0,0,.5);
+  margin: 20px auto 40px;
+  padding: 40px 30px 40px 35px;
+  color: rgba(255,255,255,.98);
+  font-size: 1.5em;
+  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: lighter;
+  resize: none;
+}
+button.save-prompt {
+  display: block;
+  margin: 10px auto;
+}
+
+@media screen and (max-width: 767px) {
+  .write-textarea { 
+    padding: 15px 20px 20px 15px;
+    font-size: 1.4em;
+  }
+  .write-page {
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+}

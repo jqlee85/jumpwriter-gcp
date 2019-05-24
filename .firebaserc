@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "jumpwriter",
+    "JumpWriter App": "jumpwriter"
+  }
+}
