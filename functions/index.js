@@ -17,7 +17,17 @@ const firestore = new Firestore({
 
 // Include getCountData function
 const getCountData = require('./getCountData')
-exports.getCountData = getCountData
+
+
+
+// Pass database to child functions so they have access to it
+exports.getCountData = functions.https.onCall((args, context) => {
+  getCountData.handler(args, context, firestore)
+})
+
+
+
+
 
 // Take the text parameter passed to this HTTP endpoint and insert it into the
 // Realtime Database under the path /messages/:pushId/original

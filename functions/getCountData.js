@@ -1,17 +1,17 @@
 const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const cors = require('cors')({origin: true});
-admin.initializeApp(functions.config().firebase);
+// const admin = require('firebase-admin');
+// const cors = require('cors')({origin: true});
+// admin.initializeApp(functions.config().firebase);
 
-const Firestore = require('@google-cloud/firestore');
-const firestore = new Firestore({
-  projectId: 'jumpwriter'
-});
+// const Firestore = require('@google-cloud/firestore');
+// const firestore = new Firestore({
+//   projectId: 'jumpwriter'
+// });
 
 // Get Count Data for a service or services based on parameters passed in
-const getCountData = functions.https.onCall((args, context) => {
+exports.handler = (args, context, firestore, functions) => {
   
-  console.log('args',args)
+  console.log('Count args',args)
   console.log('context.auth',context.auth)
 
   // Message text passed from the client.
@@ -26,7 +26,19 @@ const getCountData = functions.https.onCall((args, context) => {
 
     // const db = admin.firestore()
     const piecesRef = firestore.collection('Pieces').where('owner', '==', uid)
-    // .where("capital", "==", true)
+
+
+    // Ensure user is allowed to view service data
+
+    const allServices = getAllUsersServices(uid, firestore)
+
+    Promise.all([allServices]).    
+
+    
+
+
+
+
 
     return piecesRef.get()
     .then((querySnapshot) => {
@@ -36,7 +48,7 @@ const getCountData = functions.https.onCall((args, context) => {
         // console.log(doc.data().title, " => ", doc.data());
         theData.push(doc.data())
       });
-      console.log('theData is',theData)
+      console.log('count theData is',theData)
       return(theData)
     })
     .catch((error) => {
@@ -45,5 +57,46 @@ const getCountData = functions.https.onCall((args, context) => {
 
   }
     
-})
-export default getCountData
+}
+
+const getAllUsersServices = (uid, firestore) => {
+  console.log('uid:',uid)
+
+  // return firestore.collection('Users').get()
+  //   .then((querySnapshot)=>{
+  //     console.log('Users querySnapshot',querySnapshot)
+  //     querySnapshot.forEach((doc)=>{
+  //       let document = doc.data()
+  //       console.log('User doc',document)
+  //     })
+  //     return null
+  //   })
+  //   .catch(()=>{
+  //     throw new functions.https.HttpsError('invalid-data', 'No Users found');
+  //   })
+
+
+  const userRef = firestore.collection('Users').doc(uid)
+  
+  let allServices = []
+  return userRef.get()
+    .then((doc)=> {
+      let userData = doc.data()
+      console.log('userData',userData)
+      Object.keys(userData.projects).map((projectName)=>{
+        let project = userData.projects[projectName]
+        console.log('project',project)
+        if (project.services) {
+          Object.keys(project.services).map((serviceName)=>{
+            allServices.push(serviceName)
+            return null    
+          })
+        }
+      })
+      console.log('allServices=',allServices)
+      return(allServices)
+    })
+    .catch((error) => {
+      throw new functions.https.HttpsError('invalid-data', 'No projects were found under user.');
+    })
+}

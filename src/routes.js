@@ -2,6 +2,7 @@ import Write from "./components/Write/Write";
 import About from "./components/About/About";
 import Nouns from "./components/Nouns/Nouns";
 import Pieces from "./components/Pieces/Pieces";
+import Count from "./components/Count/Count";
 
 const routes = [
   {
@@ -31,6 +32,12 @@ const routes = [
     exact: true,
     props: {},
     component: Pieces
+  },
+  {
+    path: '/count/',
+    exact: true,
+    props: {},
+    component: Count
   }
 ];
 
