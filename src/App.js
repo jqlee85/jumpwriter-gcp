@@ -10,6 +10,7 @@ import {fetchTextPrompt} from './store/actions/promptActions';
 import Nav from './components/Nav/Nav';
 import Header from './components/Header/Header';
 import SignIn from './components/auth/SignIn/SignIn';
+import SignUp from './components/auth/SignUp/SignUp';
 import { stat } from 'fs';
 
 // import withFirebaseAuth from 'react-with-firebase-auth'
@@ -76,17 +77,6 @@ class App extends Component {
     if (this.state.navToggled) appClasses += ' app-menu-toggled';
     if (this.state.navFadeToggled) appClasses += ' nav-fade';
 
-    // { this.props.user 
-    //   ? <p>Hello, {this.props.user.displayName}</p>
-    //   : <p>Please sign in.</p>
-    // }
-    // { this.props.user
-    //   ? <button onClick={this.props.signOut}>Sign out</button>
-    //   : <button onClick={this.props.signInWithGoogle}>Sign in with Google</button>
-    // }
-
-    console.log('state',this.props)
-
     return (
       <Router>
         <Route render={({ location }) => (
@@ -104,17 +94,16 @@ class App extends Component {
               navToggled={this.state.navToggled} 
               toggleNav={this.toggleAppNav}
               signOut={this.props.signOut}
-              // signInWithGoogle={this.props.signInWithGoogle}
-              // signInWithEmailAndPassword={this.props.signInWithEmailAndPassword}
               loginOrSignup={this.showLoginOrSignup}
               user={this.props.user}
             />
             <div className="main">
-              {this.state.showLoginSignupMenu && 
+              
+              {!this.props.auth.uid && this.state.showLoginSignupMenu && 
                 <div className="login-signup-menu">
                   <SignIn/>
+                  <SignUp/>
                 </div>
-                
               }
               
               <Switch location={location}>
@@ -142,7 +131,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   // console.log(state)
   return {
-    auth: state.auth,
+    auth: state.firebase.auth,
     prompt: state.prompt,
     app: state.app,
     firebase: state.firebase

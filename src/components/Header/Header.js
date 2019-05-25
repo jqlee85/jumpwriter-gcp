@@ -30,9 +30,9 @@ class Header extends Component {
     return <header id="header">
       <Link className="site-title" to='/' onClick={this.titleLinkClicked}><h1>JumpWriter</h1></Link>
       <div className="header-auth">
-        { this.props.firebase.auth.uid
+        { this.props.auth.uid
           ? <div>
-              <p>{this.props.firebase.auth.displayName || this.props.firebase.auth.email}</p>
+              <p>{this.props.auth.displayName || this.props.auth.email}</p>
               <button onClick={this.props.signOut}>Sign out</button>
             </div>
           : <div>
@@ -48,9 +48,8 @@ class Header extends Component {
 
 // Application State
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
-    auth: state.auth,
+    auth: state.firebase.auth,
     app: state.app,
     firebase: state.firebase
   }
