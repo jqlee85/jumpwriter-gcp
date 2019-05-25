@@ -30,13 +30,7 @@ exports.handler = (args, context, firestore, functions) => {
 
     // Ensure user is allowed to view service data
 
-    const allServices = getAllUsersServices(uid, firestore)
-
-    Promise.all([allServices]).    
-
-    
-
-
+    const allServices = getAllUsersServices(uid, firestore)   
 
 
 
