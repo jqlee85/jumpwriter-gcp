@@ -85,6 +85,7 @@ class App extends Component {
     //   : <button onClick={this.props.signInWithGoogle}>Sign in with Google</button>
     // }
 
+    console.log('state',this.props)
 
     return (
       <Router>
