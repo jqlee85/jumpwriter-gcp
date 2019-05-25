@@ -24,6 +24,17 @@ class Header extends Component {
   render(){
     return <header id="header">
       <Link className="site-title" to='/' onClick={this.titleLinkClicked}><h1>JumpWriter</h1></Link>
+      <div className="header-auth">
+        { this.props.user 
+          ? <div>
+              <p>{this.props.user.displayName}</p>
+              <button onClick={this.props.signOut}>Sign out</button>
+            </div>
+          : <div>
+              <button onClick={this.props.loginOrSignup}>Login/Signup</button>
+            </div>
+        }
+      </div>
       <MenuToggle navToggled={this.props.navToggled} toggleNav={this.linkClicked}/>
     </header>
   }

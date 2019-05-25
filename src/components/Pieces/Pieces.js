@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import './Pieces.css';
-import firebaseApp from '../../firebase'
+import firebaseApp from '../../config/firebase'
 
 let messageText = 'this is the message text'
 let getPieces = firebaseApp.functions().httpsCallable('getPieces')

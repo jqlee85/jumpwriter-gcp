@@ -3,8 +3,8 @@ import styles from './Prompt.css';
 import ImagePrompt from '../ImagePrompt/ImagePrompt';
 import TextPrompt from '../TextPrompt/TextPrompt';
 import CameraIcon from '../CameraIcon/CameraIcon';
-import {fetchImagePrompt} from '../../actions/promptActions';
-import {fetchTextPrompt} from '../../actions/promptActions';
+import {fetchImagePrompt} from '../../store/actions/promptActions';
+import {fetchTextPrompt} from '../../store/actions/promptActions';
 import {connect} from 'react-redux';
 
 

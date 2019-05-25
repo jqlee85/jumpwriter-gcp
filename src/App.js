@@ -1,25 +1,27 @@
 import './App.css';
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import routes from "./routes";
+import routes from './routes';
 import {PropsRoute} from 'react-router-with-props';
 import {connect} from 'react-redux';
-import {fetchImagePrompt} from './actions/promptActions';
-import {fetchTextPrompt} from './actions/promptActions';
+import {fetchImagePrompt} from './store/actions/promptActions';
+import {fetchTextPrompt} from './store/actions/promptActions';
 import Nav from './components/Nav/Nav';
 import Header from './components/Header/Header';
+import SignIn from './components/auth/SignIn/SignIn';
+import { stat } from 'fs';
 
-import withFirebaseAuth from 'react-with-firebase-auth'
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import firebaseApp from './firebase';
+// import withFirebaseAuth from 'react-with-firebase-auth'
+// import * as firebase from 'firebase/app';
+// import 'firebase/auth';
+// import firebaseApp from './firebase';
 
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
-const firebaseAppAuth = firebaseApp.auth();
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
+// // const firebaseApp = firebase.initializeApp(firebaseConfig);
+// const firebaseAppAuth = firebaseApp.auth();
+// const providers = {
+//   googleProvider: new firebase.auth.GoogleAuthProvider(),
+// };
 
 class App extends Component {
 
@@ -29,6 +31,7 @@ class App extends Component {
       navToggled: false,
       navFrontToggled: false,
       navInitialized: false,
+      showLoginSignupMenu: false
     };  
   }
 
@@ -58,54 +61,77 @@ class App extends Component {
     }, 100); 
   }
 
+  // Show login or signup menu
+  showLoginOrSignup = () => {
+    console.log('showLoginorSignup()')
+    this.setState(prevState => ({
+      showLoginSignupMenu: true
+    }));
+
+  }
+
   render(){
     
     let appClasses = 'App';
     if (this.state.navToggled) appClasses += ' app-menu-toggled';
     if (this.state.navFadeToggled) appClasses += ' nav-fade';
 
+    // { this.props.user 
+    //   ? <p>Hello, {this.props.user.displayName}</p>
+    //   : <p>Please sign in.</p>
+    // }
+    // { this.props.user
+    //   ? <button onClick={this.props.signOut}>Sign out</button>
+    //   : <button onClick={this.props.signInWithGoogle}>Sign in with Google</button>
+    // }
+
+
     return (
-      <Route render={({ location }) => (
-        <div className="App">
-        <Nav 
-          navToggled={this.state.navToggled} 
-          userLogin={this.props.requestUserLogin} 
-          userData={this.props.user} 
-          userLogout={this.props.userLogout}
-          toggleNav={this.toggleAppNav}
-          navFront={this.state.navFrontToggled}
-          navInitialized={this.state.navInitialized}
-        />
-        <Header 
-          navToggled={this.state.navToggled} 
-          userLogin={this.props.requestUserLogin} 
-          userData={this.props.user}
-          toggleNav={this.toggleAppNav}
-        />
-        <div className="main">
-          <Switch location={location}>
-            {routes.map((route, i) => <PropsRoute 
-              key={i}
-              exact={route.exact} 
-              path={route.path} 
-              component={route.component} 
-              prompt={this.props.prompt}
+      <Router>
+        <Route render={({ location }) => (
+          <div className="App">
+            <Nav 
+              navToggled={this.state.navToggled} 
+              userLogin={this.props.requestUserLogin} 
+              userData={this.props.user} 
+              userLogout={this.props.userLogout}
+              toggleNav={this.toggleAppNav}
+              navFront={this.state.navFrontToggled}
+              navInitialized={this.state.navInitialized}
+            />
+            <Header 
+              navToggled={this.state.navToggled} 
+              toggleNav={this.toggleAppNav}
+              signOut={this.props.signOut}
+              // signInWithGoogle={this.props.signInWithGoogle}
+              // signInWithEmailAndPassword={this.props.signInWithEmailAndPassword}
+              loginOrSignup={this.showLoginOrSignup}
               user={this.props.user}
-              getImagePrompt={this.props.fetchImagePrompt}
-              getTextPrompt={this.props.fetchTextPrompt}
-            />)}
-          </Switch>
-        </div>
-          { this.props.user 
-            ? <p>Hello, {this.props.user.displayName}</p>
-            : <p>Please sign in.</p>
-          }
-          { this.props.user
-            ? <button onClick={this.props.signOut}>Sign out</button>
-            : <button onClick={this.props.signInWithGoogle}>Sign in with Google</button>
-          }
-      </div>
-    )}/>
+            />
+            <div className="main">
+              {this.state.showLoginSignupMenu && 
+                <div className="login-signup-menu">
+                  <SignIn/>
+                </div>
+                
+              }
+              
+              <Switch location={location}>
+                {routes.map((route, i) => <PropsRoute 
+                  key={i}
+                  exact={route.exact} 
+                  path={route.path} 
+                  component={route.component} 
+                  prompt={this.props.prompt}
+                  user={this.props.user}
+                  getImagePrompt={this.props.fetchImagePrompt}
+                  getTextPrompt={this.props.fetchTextPrompt}
+                />)}
+              </Switch>
+            </div>
+          </div>
+        )}/>
+      </Router>
     )
   }
 
@@ -115,8 +141,10 @@ class App extends Component {
 const mapStateToProps = (state) => {
   // console.log(state)
   return {
+    auth: state.auth,
     prompt: state.prompt,
-    app: state.app
+    app: state.app,
+    firebase: state.firebase
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -130,10 +158,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withFirebaseAuth(
-  { providers, firebaseAppAuth}
-)(
-  withRouter(connect(mapStateToProps,mapDispatchToProps)(App))
-);
+// export default withFirebaseAuth(
+//   { providers, firebaseAppAuth}
+// )(
+//   withRouter(connect(mapStateToProps,mapDispatchToProps)(App))
+// );
 
-// export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));
+export default connect(mapStateToProps,mapDispatchToProps)(App)
