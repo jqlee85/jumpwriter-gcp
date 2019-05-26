@@ -27,7 +27,7 @@ const routes = [
     component: Nouns
   },
   {
-    path: '/pieces/',
+    path: '/writing/',
     exact: true,
     props: {},
     component: Pieces

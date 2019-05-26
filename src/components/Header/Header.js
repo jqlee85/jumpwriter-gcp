@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import  './Header.css';
+import  './Header.scss';
 import MenuToggle from '../MenuToggle/MenuToggle';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
@@ -29,18 +29,19 @@ class Header extends Component {
 
     return <header id="header">
       <Link className="site-title" to='/' onClick={this.titleLinkClicked}><h1>JumpWriter</h1></Link>
-      <div className="header-auth">
-        { this.props.auth.uid
-          ? <div>
-              <p>{this.props.auth.displayName || this.props.auth.email}</p>
-              <button onClick={this.props.signOut}>Sign out</button>
-            </div>
-          : <div>
-              <button onClick={this.props.loginOrSignup}>Login/Signup</button>
-            </div>
-        }
+      <div className="right-items">
+        <div className="header-auth">
+          { this.props.auth.uid
+            ? <div>
+                <button onClick={this.props.signOut}>Sign out</button>
+              </div>
+            : <div>
+                <button onClick={this.props.loginOrSignup}>Login/Signup</button>
+              </div>
+          }
+        </div>
+        <MenuToggle navToggled={this.props.navToggled} toggleNav={this.linkClicked}/>
       </div>
-      <MenuToggle navToggled={this.props.navToggled} toggleNav={this.linkClicked}/>
     </header>
   }
 

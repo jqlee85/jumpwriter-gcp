@@ -103,14 +103,12 @@ class App extends Component {
               loginOrSignup={this.showLoginOrSignup}
               user={this.props.user}
             />
+            {!this.props.auth.uid && this.state.showLoginSignupMenu && 
+              <div className="login-signup-menu-wrapper" onClick={this.hideLoginSignupMenu}>
+                <LoginSignupMenu/>
+              </div>
+            }
             <div className="main">
-              
-              {!this.props.auth.uid && this.state.showLoginSignupMenu && 
-                <div className="login-signup-menu-wrapper" onClick={this.hideLoginSignupMenu}>
-                  <LoginSignupMenu/>
-                </div>
-              }
-              
               <Switch location={location}>
                 {routes.map((route, i) => <PropsRoute 
                   key={i}

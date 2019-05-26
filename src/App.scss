@@ -12,9 +12,12 @@ background: linear-gradient(20deg, rgba(35,35,36,1) 0%, rgba(67,67,69,1) 100%);
 textarea, input, button { outline: none; }
 
 button {
-	background: none;
-  border: none;
-  /* border: 1px solid #333; */
+  padding: 10px 12px;
+  border-radius: 5px;
+  background: rgba(67,67,69,1);
+  border: 1px solid #333;
+  box-shadow: -3px 3px 10px rgba(0,0,0,.1);
+  color: #fff;
 }
 button:hover {
   

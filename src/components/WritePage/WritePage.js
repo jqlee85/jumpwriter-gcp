@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import './WritePage.css';
+import {saveWriting} from '../../store/actions/userActions';
 
-export default function WritePage (props) {
+const WritePage = (props) => {
   const [textContent, setTextContent] = useState();
 
   function handleTextContentChange(e) {
@@ -12,6 +14,8 @@ export default function WritePage (props) {
     console.log(textContent);
   }
 
+  console.log('Writepage',props)
+
   return (
     <div className="write-page">
       <textarea className="write-textarea" onChange={handleTextContentChange} value={textContent} />
@@ -19,4 +23,20 @@ export default function WritePage (props) {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError,
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch)=> {
+  return {
+    saveWriting: (writing, pieceID) => dispatch(saveWriting(writing, pieceID))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WritePage)
 
