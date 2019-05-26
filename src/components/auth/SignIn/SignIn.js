@@ -21,6 +21,10 @@ class SignIn extends Component {
     e.preventDefault()
     this.props.signIn(this.state)
   }
+  
+  handleGoogleLogin = () => {
+    this.props.signIn(this.state, 'google')
+  }
 
   render() {
 
@@ -44,8 +48,10 @@ class SignIn extends Component {
             <div className="center red-text">
               { authError ? <p>{authError}</p> : null }
             </div>
+
           </div>
         </form>
+        <button className="login-with-google-button" onClick={this.handleGoogleLogin}>Login with Google</button>
 
       </div>
     )
@@ -61,7 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signIn: (creds) => dispatch(signIn(creds))
+    signIn: (creds,signInMethod) => dispatch(signIn(creds,signInMethod))
   }
 }
 

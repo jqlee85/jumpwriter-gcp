@@ -9,9 +9,8 @@ import {fetchImagePrompt} from './store/actions/promptActions';
 import {fetchTextPrompt} from './store/actions/promptActions';
 import Nav from './components/Nav/Nav';
 import Header from './components/Header/Header';
-import SignIn from './components/auth/SignIn/SignIn';
-import SignUp from './components/auth/SignUp/SignUp';
 import { stat } from 'fs';
+import LoginSignupMenu from './components/auth/LoginSignupMenu/LoginSignupMenu';
 
 // import withFirebaseAuth from 'react-with-firebase-auth'
 // import * as firebase from 'firebase/app';
@@ -100,10 +99,7 @@ class App extends Component {
             <div className="main">
               
               {!this.props.auth.uid && this.state.showLoginSignupMenu && 
-                <div className="login-signup-menu">
-                  <SignIn/>
-                  <SignUp/>
-                </div>
+                <LoginSignupMenu/>
               }
               
               <Switch location={location}>

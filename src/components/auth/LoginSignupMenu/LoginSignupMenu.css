@@ -1,0 +1,13 @@
+.login-signup-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position:absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(35,35,36,.8);
+  z-index: 50;
+}
