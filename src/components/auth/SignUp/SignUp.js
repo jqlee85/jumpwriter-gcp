@@ -16,7 +16,7 @@ class SignUp extends Component {
     })
   }
   handleSubmit = (e) => {
-    console.log('submitting')
+    console.log('handleSubmit')
     e.preventDefault();
     this.props.signUp(this.state);
   }
@@ -28,19 +28,17 @@ class SignUp extends Component {
   }
 
   handleFacebookSignup = (e) => {
-    e.preventDefault()
     console.log('handleFacebookSignUp')
+    e.preventDefault()    
     this.props.signUp(this.state, 'facebook')
   }
 
-
-
   render() {
-    const { auth, authError } = this.props;
+    const { authError } = this.props;
     return (
       <div className="signup-container">
         <form onSubmit={this.handleSubmit}>
-          <h5>Not a user? Sign Up Below</h5>
+          <h5>Not a user? Sign up below</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id='email' onChange={this.handleChange} value={this.state.email}/>
@@ -54,11 +52,10 @@ class SignUp extends Component {
             <button className="google-auth-button" onClick={this.handleGoogleSignup}>Google Signup</button>  
             <button className="facebook-auth-button" onClick={this.handleFacebookSignup}>Facebook Signup</button>  
           </div>
-          <div>
+          <div className="error-message">
             { authError ? <p>{authError}</p> : null }
           </div>
         </form>
-        
       </div>
     )
   }

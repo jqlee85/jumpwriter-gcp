@@ -35,7 +35,11 @@
     margin: .7em auto .2em;
   }
 
-  .login-signup-form-buttons {
+  .signup-form-text {
+    margin-top: 1em;
+  }
+
+  .login-form-buttons, .signup-form-buttons {
 
     display: flex;
     flex-direction: row;
@@ -44,12 +48,13 @@
     margin-top: .5em;
 
     button {
-      margin: 0 5px;
-      background: rgb(35,35,36);
+      margin: 0 2px;
+      background: rgb(28, 175, 77);
       font-size: .8em;
       color: #fff;
+      border-radius: 5px;
+      padding: 10px 12px;
       
-      // font-weight: bold;
 
       &.google-auth-button {
         background: rgb(223, 68, 68);
@@ -68,5 +73,8 @@
 
   }
   
+  .signup-form-buttons {
+    margin-top: 1em;
+  }
 
 }

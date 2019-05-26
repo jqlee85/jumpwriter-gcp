@@ -11,7 +11,7 @@ const LoginSignupMenu = () => {
   return (
     <div className="login-signup-menu" onClick={preventExit}>
       <SignIn/>
-      <SignUp/>
+      {/* <SignUp/> */}
     </div>
   )
 }

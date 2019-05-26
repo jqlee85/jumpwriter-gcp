@@ -5,7 +5,7 @@ export const signIn = (credentials, signInMethod=null) => {
     switch(signInMethod) {
       case 'google':
         const googleProvider = new firebase.auth.GoogleAuthProvider()
-        console.log('GOOGLE SIGNUP')
+        console.log('GOOGLE LOGIN')
         firebase.auth().signInWithPopup(googleProvider)
         .then(function(result) {
           dispatch({ type: 'LOGIN_SUCCESS' });
@@ -13,9 +13,10 @@ export const signIn = (credentials, signInMethod=null) => {
         .catch(function(error) {
           dispatch({ type: 'LOGIN_ERROR', error});
         })
+        return null
       case 'facebook':
         const facebookProvider = new firebase.auth.FacebookAuthProvider()
-        console.log('FACEBOOK SIGNUP')
+        console.log('FACEBOOK LOGIN')
         firebase.auth().signInWithPopup(facebookProvider)
         .then(function(result) {
           dispatch({ type: 'LOGIN_SUCCESS' })
@@ -23,7 +24,9 @@ export const signIn = (credentials, signInMethod=null) => {
         .catch(function(error) {
           dispatch({ type: 'LOGIN_ERROR', error})
         })
+        return null
       default:
+        console.log('EMAIL LOGIN')
         firebase.auth().signInWithEmailAndPassword(
           credentials.email,
           credentials.password
@@ -32,6 +35,7 @@ export const signIn = (credentials, signInMethod=null) => {
         }).catch((error)=>{
           dispatch({type: 'LOGIN_ERROR', error})
         })
+        return null
     }
 
   }
@@ -66,6 +70,7 @@ export const signUp = (newUser, signUpMethod=null) => {
         .catch(function(error) {
           dispatch({ type: 'SIGNUP_ERROR', error})
         })
+        return null
       case 'facebook':
         const facebookProvider = new firebase.auth.FacebookAuthProvider()
         console.log('FACEBOOK SIGNUP')
@@ -76,7 +81,9 @@ export const signUp = (newUser, signUpMethod=null) => {
         .catch(function(error) {
           dispatch({ type: 'SIGNUP_ERROR', error})
         })
+        return null
       default:
+        console.log('EMAIL SIGNUP')
         firebase.auth().createUserWithEmailAndPassword(
           newUser.email, 
           newUser.password
@@ -91,6 +98,7 @@ export const signUp = (newUser, signUpMethod=null) => {
         }).catch((error) => {
           dispatch({ type: 'SIGNUP_ERROR', error})
         })
+        return null
     }
     
   }
