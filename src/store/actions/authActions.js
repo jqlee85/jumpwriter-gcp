@@ -1,31 +1,39 @@
-export const signIn = (credentials, signUpMethod=null) => {
+export const signIn = (credentials, signInMethod=null) => {
   return (dispatch, getState, {getFirebase}) => {
     const firebase = getFirebase()
     
-
-
-    if (signUpMethod === 'google') {
-      const googleProvider = new firebase.auth.GoogleAuthProvider()
-      console.log('GOOGLE SIGNUP')
-      firebase.auth().signInWithPopup(googleProvider)
-      .then(function(result) {
-        dispatch({ type: 'SIGNUP_SUCCESS' });
-      })
-      .catch(function(error) {
-        dispatch({ type: 'SIGNUP_ERROR', error});
-      });
-    } else {
-      firebase.auth().signInWithEmailAndPassword(
-        credentials.email,
-        credentials.password
-      ).then(()=>{
-        dispatch({type: 'LOGIN_SUCCESS'})
-      }).catch((error)=>{
-        dispatch({type: 'LOGIN_ERROR', error})
-      })
+    switch(signInMethod) {
+      case 'google':
+        const googleProvider = new firebase.auth.GoogleAuthProvider()
+        console.log('GOOGLE SIGNUP')
+        firebase.auth().signInWithPopup(googleProvider)
+        .then(function(result) {
+          dispatch({ type: 'LOGIN_SUCCESS' });
+        })
+        .catch(function(error) {
+          dispatch({ type: 'LOGIN_ERROR', error});
+        })
+      case 'facebook':
+        const facebookProvider = new firebase.auth.FacebookAuthProvider()
+        console.log('FACEBOOK SIGNUP')
+        firebase.auth().signInWithPopup(facebookProvider)
+        .then(function(result) {
+          dispatch({ type: 'LOGIN_SUCCESS' })
+        })
+        .catch(function(error) {
+          dispatch({ type: 'LOGIN_ERROR', error})
+        })
+      default:
+        firebase.auth().signInWithEmailAndPassword(
+          credentials.email,
+          credentials.password
+        ).then(()=>{
+          dispatch({type: 'LOGIN_SUCCESS'})
+        }).catch((error)=>{
+          dispatch({type: 'LOGIN_ERROR', error})
+        })
     }
 
-    
   }
 }
 
@@ -41,39 +49,48 @@ export const signOut = () => {
 
 export const signUp = (newUser, signUpMethod=null) => {
   return (dispatch, getState, {getFirebase, getFirestore}) => {
-    const firebase = getFirebase();
-    const firestore = getFirestore();
-    const googleProvider = new firebase.auth.GoogleAuthProvider()
-
+    const firebase = getFirebase()
+    const firestore = getFirestore()
+    
     console.log('newUser',newUser)
     console.log('signUpMethod',signUpMethod)
 
-    if (signUpMethod === 'google') {
-      console.log('GOOGLE SIGNUP')
-      firebase.auth().signInWithPopup(googleProvider)
-      .then(function(result) {
-        dispatch({ type: 'SIGNUP_SUCCESS' });
-      })
-      .catch(function(error) {
-        dispatch({ type: 'SIGNUP_ERROR', error});
-      });
-
-
-    } else {
-      firebase.auth().createUserWithEmailAndPassword(
-        newUser.email, 
-        newUser.password
-      ).then(resp => {
-        return firestore.collection('Users').doc(resp.user.uid).set({
-          firstName: newUser.firstName,
-          lastName: newUser.lastName,
-          initials: newUser.firstName[0] + newUser.lastName[0]
-        });
-      }).then(() => {
-        dispatch({ type: 'SIGNUP_SUCCESS' });
-      }).catch((error) => {
-        dispatch({ type: 'SIGNUP_ERROR', error});
-      });
+    switch(signUpMethod) {
+      case 'google':
+        const googleProvider = new firebase.auth.GoogleAuthProvider()
+        console.log('GOOGLE SIGNUP')
+        firebase.auth().signInWithPopup(googleProvider)
+        .then(function(result) {
+          dispatch({ type: 'SIGNUP_SUCCESS' })
+        })
+        .catch(function(error) {
+          dispatch({ type: 'SIGNUP_ERROR', error})
+        })
+      case 'facebook':
+        const facebookProvider = new firebase.auth.FacebookAuthProvider()
+        console.log('FACEBOOK SIGNUP')
+        firebase.auth().signInWithPopup(facebookProvider)
+        .then(function(result) {
+          dispatch({ type: 'SIGNUP_SUCCESS' })
+        })
+        .catch(function(error) {
+          dispatch({ type: 'SIGNUP_ERROR', error})
+        })
+      default:
+        firebase.auth().createUserWithEmailAndPassword(
+          newUser.email, 
+          newUser.password
+        ).then(resp => {
+          return firestore.collection('Users').doc(resp.user.uid).set({
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            initials: newUser.firstName[0] + newUser.lastName[0]
+          });
+        }).then(() => {
+          dispatch({ type: 'SIGNUP_SUCCESS' })
+        }).catch((error) => {
+          dispatch({ type: 'SIGNUP_ERROR', error})
+        })
     }
     
   }

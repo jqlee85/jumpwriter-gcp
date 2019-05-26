@@ -22,8 +22,14 @@ class SignIn extends Component {
     this.props.signIn(this.state)
   }
   
-  handleGoogleLogin = () => {
+  handleGoogleLogin = (e) => {
+    e.preventDefault()
     this.props.signIn(this.state, 'google')
+  }
+
+  handleFacebookLogin = (e) => {
+    e.preventDefault()
+    this.props.signIn(this.state, 'facebook')
   }
 
   render() {
@@ -34,7 +40,7 @@ class SignIn extends Component {
       <div className="signin-container">
         
         <form onSubmit={this.handleSubmit}>
-          <h4>Sign In</h4>
+          <h4>Login</h4>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" onChange={this.handleChange}/>
@@ -43,15 +49,17 @@ class SignIn extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" onChange={this.handleChange}/>
           </div>
-          
-          <button className="login-button">Login</button>
+          <div className="login-signup-form-buttons">
+            <button className="login-button">Email Login</button>
+            <button className="google-auth-button" onClick={this.handleGoogleLogin}>Google Login</button>
+            <button className="facebook-auth-button" onClick={this.handleFacebookLogin}>Facebook Login</button>  
+          </div>
           <div className="center red-text">
             { authError ? <p>{authError}</p> : null }
           </div>
 
-          
         </form>
-        <button className="login-with-google-button" onClick={this.handleGoogleLogin}>Login with Google</button>
+        
 
       </div>
     )

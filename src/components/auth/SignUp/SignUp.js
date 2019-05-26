@@ -16,15 +16,21 @@ class SignUp extends Component {
     })
   }
   handleSubmit = (e) => {
+    console.log('submitting')
     e.preventDefault();
     this.props.signUp(this.state);
   }
 
   handleGoogleSignup = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     console.log('handleGoogleSignUp')
-    // if validateEmail(this.state.email)
     this.props.signUp(this.state, 'google');
+  }
+
+  handleFacebookSignup = (e) => {
+    e.preventDefault()
+    console.log('handleFacebookSignUp')
+    this.props.signUp(this.state, 'facebook')
   }
 
 
@@ -34,7 +40,7 @@ class SignUp extends Component {
     return (
       <div className="signup-container">
         <form onSubmit={this.handleSubmit}>
-          <h4 >Sign Up</h4>
+          <h5>Not a user? Sign Up Below</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id='email' onChange={this.handleChange} value={this.state.email}/>
@@ -43,12 +49,16 @@ class SignUp extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" id='password' onChange={this.handleChange} value={this.state.password}/>
           </div>
-          <button>Sign Up</button>
+          <div className="login-signup-form-buttons">
+            <button>Email Signup</button>
+            <button className="google-auth-button" onClick={this.handleGoogleSignup}>Google Signup</button>  
+            <button className="facebook-auth-button" onClick={this.handleFacebookSignup}>Facebook Signup</button>  
+          </div>
           <div>
             { authError ? <p>{authError}</p> : null }
           </div>
         </form>
-        <button onClick={this.handleGoogleSignup}>Create With Google/Gmail Account</button>
+        
       </div>
     )
   }
