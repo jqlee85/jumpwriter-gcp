@@ -66,8 +66,15 @@ class App extends Component {
     console.log('showLoginorSignup()')
     this.setState(prevState => ({
       showLoginSignupMenu: true
-    }));
+    }))
 
+  }
+
+  hideLoginSignupMenu = () => {
+    console.log('hideLoginorSignup()')
+    this.setState(prevState => ({
+      showLoginSignupMenu: false
+    }))
   }
 
   render(){
@@ -99,7 +106,9 @@ class App extends Component {
             <div className="main">
               
               {!this.props.auth.uid && this.state.showLoginSignupMenu && 
-                <LoginSignupMenu/>
+                <div className="login-signup-menu-wrapper" onClick={this.hideLoginSignupMenu}>
+                  <LoginSignupMenu/>
+                </div>
               }
               
               <Switch location={location}>

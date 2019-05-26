@@ -114,19 +114,20 @@ button:active {
 
   input {
     width: 100%;
-    background: rgb(35,35,36) !important;
-    border: 1px solid rgb(10,10,10);
+    background: rgba(35,35,36, .8) !important;
+    border: 1px solid rgba(10,10,10,.5);
     padding: 5px;
+    box-sizing: border-box;
     border-radius: 5px;
     margin: 5px 0px 15px;
     font-size: 1.4em;
     color: #fff;
     &:-webkit-autofill {
-      background: rgb(35,35,36);
+      // background: rgb(35,35,36);
       color: #fff;
     }
     &:-internal-autofill-selected {
-      background: rgb(35,35,36);
+      // background: rgb(35,35,36);
       color: #fff;
     }
   }
