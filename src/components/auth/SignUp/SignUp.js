@@ -3,14 +3,12 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signUp } from '../../../store/actions/authActions'
 import {validateEmail } from '../../../lib/utilities'
-import './SignUp.css'
+import './SignUp.scss'
 
 class SignUp extends Component {
   state = {
     email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
+    password: ''
   }
   handleChange = (e) => {
     this.setState({
@@ -45,19 +43,9 @@ class SignUp extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" id='password' onChange={this.handleChange} value={this.state.password}/>
           </div>
-          <div className="input-field">
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" id='firstName' onChange={this.handleChange} value={this.state.firstName}/>
-          </div>
-          <div className="input-field">
-            <label htmlFor="lastName">Last Name</label>
-            <input type="text" id='lastName' onChange={this.handleChange} value={this.state.lastName}/>
-          </div>
-          <div className="input-field">
-            <button>Sign Up</button>
-            <div>
-              { authError ? <p>{authError}</p> : null }
-            </div>
+          <button>Sign Up</button>
+          <div>
+            { authError ? <p>{authError}</p> : null }
           </div>
         </form>
         <button onClick={this.handleGoogleSignup}>Create With Google/Gmail Account</button>

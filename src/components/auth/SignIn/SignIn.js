@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {signIn} from '../../../store/actions/authActions'
-import  './SignIn.css';
+import  './SignIn.scss';
 
 class SignIn extends Component {
   
@@ -43,13 +43,13 @@ class SignIn extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" onChange={this.handleChange}/>
           </div>
-          <div className="input-field">
-            <button className="login-button">Login</button>
-            <div className="center red-text">
-              { authError ? <p>{authError}</p> : null }
-            </div>
-
+          
+          <button className="login-button">Login</button>
+          <div className="center red-text">
+            { authError ? <p>{authError}</p> : null }
           </div>
+
+          
         </form>
         <button className="login-with-google-button" onClick={this.handleGoogleLogin}>Login with Google</button>
 

@@ -97,3 +97,42 @@ button:active {
        url('/public/fonts/geomanist/geomanist-bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
        url('/public/fonts/geomanist/geomanist-bold-webfont.svg') format('svg'); /* Legacy iOS */
 }
+
+/* Forms */
+.input-field {
+  
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+
+  label {
+    font-size: 1em;
+    color: rgb(10,10,10);
+  }
+
+  input {
+    width: 100%;
+    background: rgb(35,35,36) !important;
+    border: 1px solid rgb(10,10,10);
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0px 15px;
+    font-size: 1.4em;
+    color: #fff;
+    &:-webkit-autofill {
+      background: rgb(35,35,36);
+      color: #fff;
+    }
+    &:-internal-autofill-selected {
+      background: rgb(35,35,36);
+      color: #fff;
+    }
+  }
+}
+
+button {
+  border-radius: 5px;
+  padding: 10px 15px;
+}
