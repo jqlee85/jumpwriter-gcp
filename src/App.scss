@@ -13,7 +13,6 @@ textarea, input, button { outline: none; }
 
 button {
   padding: 10px 12px;
-  border-radius: 5px;
   background: rgba(67,67,69,1);
   border: 1px solid #333;
   box-shadow: -3px 3px 10px rgba(0,0,0,.1);
@@ -121,7 +120,7 @@ button:active {
     border: 1px solid rgba(10,10,10,.5);
     padding: 5px;
     box-sizing: border-box;
-    border-radius: 5px;
+    // border-radius: 5px;
     margin: 5px 0px 15px;
     font-size: 1.4em;
     color: #fff;
