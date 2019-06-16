@@ -33,7 +33,7 @@ exports.getPieces = functions.https.onCall((data, context) => {
     // const email = context.auth.token.email || null  
 
     // const db = admin.firestore()
-    const piecesRef = firestore.collection('Pieces').where('owner', '==', uid)
+    const piecesRef = firestore.collection('Pieces').where('uid', '==', uid)
     // .where("capital", "==", true)
 
     return piecesRef.get()

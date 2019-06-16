@@ -28,7 +28,7 @@ export const saveWriting = (writing, pieceID=null, prompt=null) => {
       // If no existing piece, create a new one
       firestore.collection('Pieces').add({
         content: writing,
-        owner: authorId,
+        uid: authorId,
         prompt: prompt,
         createdAt: new Date()
       }).then((response) => {
