@@ -4,17 +4,29 @@ import './WritePage.css';
 import {saveWriting} from '../../store/actions/userActions';
 
 const WritePage = (props) => {
+  
+  // TODO get textContent from the document in firestore if pieceID is defined by the route
+  
   const [textContent, setTextContent] = useState(null)
   const [pieceID, setPieceID] = useState(null)
   useEffect(()=>{
-    setPieceID(props.user.pieceID)
+    if (!props.pieceID && props.user.pieceID) {
+      setPieceID(props.user.pieceID)
+    }
   },[props.user.pieceID])
 
-  function handleTextContentChange(e) {
+  useEffect(()=>{
+    console.log('setpieceid',props.pieceID)
+    setPieceID(props.pieceID)
+  },[props.pieceID])
+
+  const handleTextContentChange = (e) => {
     setTextContent(e.target.value)
   }
 
-  
+  const getWriting = () => {
+
+  }
 
   const saveWriting = (e) => {
     console.log(textContent);
@@ -31,12 +43,13 @@ const WritePage = (props) => {
 
   }
 
+
+
   console.log('Writepage',props)
 
   return (
     <div className="write-page">
       <textarea className="write-textarea" onChange={handleTextContentChange} value={textContent} datapieceID={pieceID} />
-
       <button className="save-prompt" onClick={saveWriting}>Save</button>
     </div>
   )
@@ -46,7 +59,7 @@ const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
     authError: state.auth.authError,
-    user: state.user
+    user: state.user,
   }
 }
 

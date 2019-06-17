@@ -31,6 +31,10 @@ const routes = [
     exact: true,
     props: {},
     component: Pieces
+  },
+  {
+    path: '/writing/:pieceID',
+    component: Write,
   }
 ];
 
