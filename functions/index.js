@@ -42,7 +42,8 @@ exports.getPieces = functions.https.onCall((data, context) => {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.data().title, " => ", doc.data());
-        theData.push(doc.data())
+        console.log('DOC',doc)
+        theData.push({id: doc.id,data:doc.data()})
       });
       console.log('theData is',theData)
       return(theData)

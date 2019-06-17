@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import './Pieces.css';
 import firebaseApp from '../../config/firebase'
 
@@ -33,8 +34,9 @@ const Pieces = (props) => {
           console.log('piece = ',piece)
           return(
             <div>
-              <h3>{piece.title}</h3>
-              <p>{piece.content}</p>
+              <h3>{piece.data.title}</h3>
+              <p>{piece.data.content}</p>
+              <Link to={'/writing/'+piece.id}><button>Edit</button></Link>
             </div>
           )
         })
