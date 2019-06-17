@@ -42,9 +42,9 @@ const store = createStore(rootReducer,
     reactReduxFirebase(fbConfig, {userProfile: 'users', useFirestoreForProfile: true, attachAuthIsReady: true}),
     reduxFirestore(fbConfig) // redux bindings for firestore
   )
-);
+)
 
 store.firebaseAuthIsReady.then(() => {
   ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-  serviceWorker.register();
-});
+  serviceWorker.register()
+})

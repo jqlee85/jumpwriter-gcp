@@ -24,8 +24,6 @@ class Header extends Component {
   }
 
   render(){
-    
-    console.log('PROPS',this.props)
 
     return <header id="header">
       <Link className="site-title" to='/' onClick={this.titleLinkClicked}><h1>JumpWriter</h1></Link>

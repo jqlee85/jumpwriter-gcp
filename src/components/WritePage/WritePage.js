@@ -1,7 +1,9 @@
-import React, {useState,useEffect} from 'react';
-import {connect} from 'react-redux';
-import './WritePage.css';
-import {saveWriting} from '../../store/actions/userActions';
+import React, {useState,useEffect} from 'react'
+import {connect} from 'react-redux'
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import './WritePage.css'
+import {saveWriting} from '../../store/actions/userActions'
 
 const WritePage = (props) => {
   
@@ -16,9 +18,14 @@ const WritePage = (props) => {
   },[props.user.pieceID])
 
   useEffect(()=>{
-    console.log('setpieceid',props.pieceID)
     setPieceID(props.pieceID)
   },[props.pieceID])
+
+  useEffect(()=>{
+    if (pieceID && props.piece && props.piece.content) {
+      setTextContent(props.piece.content)
+    }
+  },[props.piece])
 
   const handleTextContentChange = (e) => {
     setTextContent(e.target.value)
@@ -29,12 +36,11 @@ const WritePage = (props) => {
   }
 
   const saveWriting = (e) => {
-    console.log(textContent);
+    
     // if not logged in, pop up login/register prompt
     if (props.auth.uid) {
       console.log('logged in, do save')
       // console.log('e.target',e.target)
-      console.log('save to ID',pieceID)
       props.saveWriting(textContent,pieceID)
 
     } else {
@@ -43,20 +49,21 @@ const WritePage = (props) => {
 
   }
 
-
-
-  console.log('Writepage',props)
-
+  console.log('PROPS',props)
   return (
     <div className="write-page">
-      <textarea className="write-textarea" onChange={handleTextContentChange} value={textContent} datapieceID={pieceID} />
+      <textarea className="write-textarea" onChange={handleTextContentChange} value={textContent} datapieceid={pieceID} />
       <button className="save-prompt" onClick={saveWriting}>Save</button>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state,ownProps) => {
+  const id = ownProps.pieceID;
+  const pieces = state.firestore.data.Pieces;
+  const piece = pieces ? pieces[id] : null
   return {
+    piece: piece,
     auth: state.firebase.auth,
     authError: state.auth.authError,
     user: state.user,
@@ -69,5 +76,11 @@ const mapDispatchToProps = (dispatch)=> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WritePage)
-
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  firestoreConnect( props => { return ([{
+      collection: 'Pieces',
+      doc: props.pieceID,
+    }])
+  })
+)(WritePage)
