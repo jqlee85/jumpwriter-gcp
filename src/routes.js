@@ -2,6 +2,7 @@ import Write from "./components/Write/Write";
 import About from "./components/About/About";
 import Nouns from "./components/Nouns/Nouns";
 import Pieces from "./components/Pieces/Pieces";
+import Terms from "./components/Terms/Terms";
 
 const routes = [
   {
@@ -19,6 +20,12 @@ const routes = [
     exact: true,
     props: {},
     component: About
+  },
+  {
+    path: '/terms-and-privacy',
+    exact: true,
+    props: {},
+    component: Terms
   },
   {
     path: '/nouns',

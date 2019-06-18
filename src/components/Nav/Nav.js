@@ -33,6 +33,7 @@ class Nav extends Component {
         }
         <li><Link to='/about' onClick={this.routeLinkClicked}>About</Link></li>
         <li><Link to='/contact' onClick={this.routeLinkClicked}>Contact</Link></li>
+        <Link className="terms-link" to="/terms-and-privacy" onClick={this.routeLinkClicked}>Terms, Conditions & Privacy</Link>
       </ul>
     </nav>;
   }
