@@ -32,7 +32,7 @@ class Nav extends Component {
           <li><Link to='/writing/' onClick={this.routeLinkClicked}>My Writing</Link></li>
         }
         <li><Link to='/about' onClick={this.routeLinkClicked}>About</Link></li>
-        <li><Link to='/contact' onClick={this.routeLinkClicked}>Contact</Link></li>
+        <li><a href='https://jumpoff.io/contact' onClick={this.routeLinkClicked} target="_blank">Contact</a></li>
         <Link className="terms-link" to="/terms-and-privacy" onClick={this.routeLinkClicked}>Terms, Conditions & Privacy</Link>
       </ul>
     </nav>;
