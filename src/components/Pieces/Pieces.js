@@ -1,42 +1,26 @@
 import React, {useState,useEffect} from 'react';
+import {connect} from 'react-redux'
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
 import {Link} from 'react-router-dom';
 import './Pieces.css';
-import firebaseApp from '../../config/firebase'
-
-let messageText = 'this is the message text'
-let getPieces = firebaseApp.functions().httpsCallable('getPieces')
 
 const Pieces = (props) => {
     
-  const [pieces, setPieces] = useState([])
-  console.log('pieces',pieces)
-  useEffect(()=>{
-
-    getPieces({text: messageText}).then((result)=>{
-      console.log('result',result)
-      setPieces(result.data)
-    }).catch((error)=>{
-      // Getting the Error details.
-      var code = error.code
-      var message = error.message
-      var details = error.details
-      console.log('error:',error)
-    })
-
-  },[])
+  const {pieces} = props
 
   return (
     <div className="pieces">
       <h1>Pieces</h1>
       {pieces && Object.keys(pieces).length > 0 && 
-        Object.keys(pieces).map((pieceKey)=>{
-          let piece = pieces[pieceKey]
+        Object.keys(pieces).map((pieceID)=>{
+          let piece = pieces[pieceID]
           console.log('piece = ',piece)
           return(
-            <div>
-              <h3>{piece.data.title}</h3>
-              <p>{piece.data.content}</p>
-              <Link to={'/writing/'+piece.id}><button>Edit</button></Link>
+            <div className="list-piece" datapieceid={pieceID} key={pieceID}>
+              <h3>{piece.title}</h3>
+              <p>{piece.content}</p>
+              <Link to={'/writing/'+pieceID}><button>Edit</button></Link>
             </div>
           )
         })
@@ -46,4 +30,22 @@ const Pieces = (props) => {
 
 }
 
-export default Pieces
+
+const mapStateToProps = (state,ownProps) => {
+  const pieces = state.firestore.data.Pieces;  
+  return {
+    pieces: pieces,
+    auth: state.firebase.auth,
+    authError: state.auth.authError,
+    user: state.user,
+  }
+}
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect( props => { return ([{
+      collection: 'Pieces',
+      where: [['uid', '==', props.auth.uid]],
+    }])
+  })
+)(Pieces)
