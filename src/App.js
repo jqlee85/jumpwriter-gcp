@@ -119,6 +119,7 @@ class App extends Component {
                   user={this.props.user}
                   getImagePrompt={this.props.fetchImagePrompt}
                   getTextPrompt={this.props.fetchTextPrompt}
+                  showLoginOrSignup={this.showLoginOrSignup}
                 />)}
               </Switch>
             </div>

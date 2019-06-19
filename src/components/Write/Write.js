@@ -14,9 +14,12 @@ export default function Write(props) {
     <Prompt 
       prompt={props.prompt}
       getImagePrompt={props.getImagePrompt}
-      getTextPrompt={props.getTextPrompt}
+      getTextPrompt={props.getTextPrompt}      
     />
-    <WritePage pieceID={pieceID} />
+    <WritePage 
+      pieceID={pieceID} 
+      showLoginOrSignup={props.showLoginOrSignup}
+    />
   </div>
 
 }

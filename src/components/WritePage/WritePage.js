@@ -45,6 +45,7 @@ const WritePage = (props) => {
 
     } else {
       console.log('not logged in, display login form and message')
+      props.showLoginOrSignup()
     }
 
   }
