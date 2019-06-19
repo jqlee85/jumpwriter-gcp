@@ -12,17 +12,6 @@ import Header from './components/Header/Header';
 import { stat } from 'fs';
 import LoginSignupMenu from './components/auth/LoginSignupMenu/LoginSignupMenu';
 
-// import withFirebaseAuth from 'react-with-firebase-auth'
-// import * as firebase from 'firebase/app';
-// import 'firebase/auth';
-// import firebaseApp from './firebase';
-
-// // const firebaseApp = firebase.initializeApp(firebaseConfig);
-// const firebaseAppAuth = firebaseApp.auth();
-// const providers = {
-//   googleProvider: new firebase.auth.GoogleAuthProvider(),
-// };
-
 class App extends Component {
 
   constructor(props) {
@@ -31,7 +20,8 @@ class App extends Component {
       navToggled: false,
       navFrontToggled: false,
       navInitialized: false,
-      showLoginSignupMenu: false
+      showLoginSignupMenu: false,
+      showLoginSignupMenuMessage: null
     };  
   }
 
@@ -62,18 +52,19 @@ class App extends Component {
   }
 
   // Show login or signup menu
-  showLoginOrSignup = () => {
-    console.log('showLoginorSignup()')
+  showLoginOrSignup = (message) => {
+    message = (typeof(message)=== 'string') ? message : null
     this.setState(prevState => ({
-      showLoginSignupMenu: true
+      showLoginSignupMenu: true,
+      showLoginSignupMenuMessage: message
     }))
 
   }
 
   hideLoginSignupMenu = () => {
-    console.log('hideLoginorSignup()')
     this.setState(prevState => ({
-      showLoginSignupMenu: false
+      showLoginSignupMenu: false,
+      showLoginSignupMenuMessage: null
     }))
   }
 
@@ -105,7 +96,7 @@ class App extends Component {
             />
             {!this.props.auth.uid && this.state.showLoginSignupMenu && 
               <div className="login-signup-menu-wrapper" onClick={this.hideLoginSignupMenu}>
-                <LoginSignupMenu/>
+                <LoginSignupMenu message={this.state.showLoginSignupMenuMessage}/>
               </div>
             }
             <div className="main">

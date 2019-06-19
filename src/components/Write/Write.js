@@ -10,6 +10,10 @@ export default function Write(props) {
     setPieceID(props.match.params.pieceID)
   },[props.match.params.pieceID])
 
+  const showLoginOrSignup = (message) => {
+    props.showLoginOrSignup(message)
+  }
+
   return <div className="write">
     <Prompt 
       prompt={props.prompt}

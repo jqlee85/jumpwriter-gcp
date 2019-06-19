@@ -9,7 +9,7 @@ const WritePage = (props) => {
   
   // TODO get textContent from the document in firestore if pieceID is defined by the route
   
-  const [textContent, setTextContent] = useState(null)
+  const [textContent, setTextContent] = useState('')
   const [pieceID, setPieceID] = useState(null)
   useEffect(()=>{
     if (!props.pieceID && props.user.pieceID) {
@@ -45,7 +45,7 @@ const WritePage = (props) => {
 
     } else {
       console.log('not logged in, display login form and message')
-      props.showLoginOrSignup()
+      props.showLoginOrSignup('Please log in or sign up to save your writing.')
     }
 
   }

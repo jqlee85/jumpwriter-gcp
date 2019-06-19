@@ -1,4 +1,25 @@
 .signin-container {
   width: 80%;
   box-sizing: border-box;
+  .notice {
+    // background: rgba(35,35,36,.5);
+    background: rgba(255,255,255,.5);
+    // border: 2px solid rgba(255, 220, 81, 0.852);
+    padding: 4px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 20px rgba(0,0,0,.2);
+    margin: 1.3em auto;
+    p {
+      // color: rgba(255, 220, 81, 1);
+      color: #333;
+      font-weight: bold;
+    }
+  }
+  label {
+    color: #fff;
+  }
+  .login-or {
+    font-size:.85em;
+    margin: 0 .5em;
+  }
 }

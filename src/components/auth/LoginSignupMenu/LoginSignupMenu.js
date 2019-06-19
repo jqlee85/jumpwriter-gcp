@@ -6,10 +6,13 @@ const preventExit = (e) => {
   e.stopPropagation()
 }
 
-const LoginSignupMenu = () => {
+const LoginSignupMenu = (props) => {
+  
+  let {message} = props
+
   return (
     <div className="login-signup-menu" onClick={preventExit}>
-      <SignIn/>
+      <SignIn message={message}/>
     </div>
   )
 }
