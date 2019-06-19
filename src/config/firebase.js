@@ -13,13 +13,12 @@ import 'firebase/functions'
 // }
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDmo7ifET5tw5oP00wwUnv3OfXrK3gNQ90",
+  apiKey: "AIzaSyDaxyQGSazwKmTwz1zNFnLOF1w1IyGp3aA",
   authDomain: "jumpwriter.firebaseapp.com",
   databaseURL: "https://jumpwriter.firebaseio.com",
   projectId: "jumpwriter",
   storageBucket: "jumpwriter.appspot.com",
   messagingSenderId: "335067511694",
-  appId: "1:335067511694:web:fe1e99f35d0b87ad"
 }
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
