@@ -1,0 +1,90 @@
+button.jw-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: linear-gradient(20deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  border-radius: 30px;
+  border: none;
+  box-shadow: -3px 3px 10px rgba(0,0,0,.1);
+  width: auto;
+  height: 60px;
+  margin: 0px;
+  padding: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition: border-color .3s ease; /* Safari */
+  transition: border-color .3s ease;
+
+  &.save-prompt {
+    background: rgb(34,34,35);
+    background: linear-gradient(32deg, rgba(34,34,35,1) 0%, rgba(64,64,66,1) 100%);
+    .button-icon {
+      opacity: 0.7;
+      svg {
+        path {
+          fill: #1a1a1b;
+
+        }
+      }
+      
+    }
+    &.inactive {      
+      
+    }
+    &.active {
+      background: linear-gradient(20deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+      .button-icon {
+        opacity: 1;
+      }
+    }
+   
+  }
+
+  &.large {
+    height: 70px;
+    border-radius: 35px;
+    font-size: 24px;
+  }
+
+  &.circle-button {
+    width: 60px;
+    padding: 0px;
+    &.large {
+      width: 70px;
+    }
+  }
+  &:hover {
+    // background: linear-gradient(20deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    span {
+      color: #fafafa;
+    }
+  }
+
+  span {
+    display: block;
+    font-size: 18px;
+    font-weight: lighter;
+    -webkit-transition: color .3s ease; /* Safari */
+    transition: color .3s ease;
+    margin: auto;
+  }
+  
+  svg {
+    display: block;
+    margin: auto;
+    path {
+      fill: #fafafa;
+    }
+  }
+
+  .button-text {
+    margin-right: 10px;
+  }
+
+  .save-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+}

@@ -13,7 +13,7 @@ import 'firebase/functions'
 // }
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDaxyQGSazwKmTwz1zNFnLOF1w1IyGp3aA",
+  apiKey: "AIzaSyDklB38sJfNadhBf7HJJlqTDlbATPHaEsQ",
   authDomain: "jumpwriter.firebaseapp.com",
   databaseURL: "https://jumpwriter.firebaseio.com",
   projectId: "jumpwriter",

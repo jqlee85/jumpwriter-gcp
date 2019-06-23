@@ -18,7 +18,7 @@
   border-radius: 8px;
   border: none;
   box-shadow: -20px 20px 80px rgba(0,0,0,.5);
-  margin: 20px auto 40px;
+  margin: 20px auto 0px;
   padding: 40px 30px 40px 35px;
   color: rgba(255,255,255,.98);
   font-size: 1.5em;
@@ -27,9 +27,11 @@
   font-weight: lighter;
   resize: none;
 }
-button.save-prompt {
-  display: block;
-  margin: 10px auto;
+
+button.jw-button.save-prompt {
+  float: right;
+  margin-top: -40px;
+  margin-right: -25px;
 }
 
 @media screen and (max-width: 767px) {

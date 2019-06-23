@@ -46,7 +46,6 @@ class SignIn extends Component {
 
     const {authError,message} = this.props
     console.log('message=>',message)
-
     return (
       <div className="signin-container">
         {message && 
@@ -76,9 +75,6 @@ class SignIn extends Component {
               Google Login
             </button>
           </div>
-          <div className="error-message">
-            { authError ? <p>{authError}</p> : null }
-          </div>
           <h5 className="signup-form-text">Not a user? Sign up</h5>
           <div className="signup-form-buttons">
             <button className="login-button" onClick={this.handleEmailSignup}>
@@ -92,6 +88,11 @@ class SignIn extends Component {
                 Google Signup
             </button> 
           </div>
+          { authError &&
+            <div className="notice">
+              <p>{authError}</p>
+            </div>
+          }
         </form>
       </div>
     )

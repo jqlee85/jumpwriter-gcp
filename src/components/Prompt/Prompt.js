@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from './Prompt.css';
+import styles from './Prompt.scss';
 import ImagePrompt from '../ImagePrompt/ImagePrompt';
 import TextPrompt from '../TextPrompt/TextPrompt';
 import CameraIcon from '../CameraIcon/CameraIcon';
@@ -21,10 +21,10 @@ class Prompt extends Component {
       }
       { !this.props.prompt.status &&
         <div className="prompt-types">
-          <button className="prompt-type-button jo-chasing-icon jo-icon-1" onClick={this.props.getTextPrompt}>
+          <button className="jw-button circle-button jo-chasing-icon jo-icon-1" onClick={this.props.getTextPrompt}>
             <span>TEXT</span>
           </button>
-          <button className="prompt-type-button prompt-image-button jo-chasing-icon jo-icon-2" onClick={this.props.getImagePrompt}>
+          <button className="jw-button circle-button prompt-image-button jo-chasing-icon jo-icon-2" onClick={this.props.getImagePrompt}>
             <CameraIcon iconWidth="30px" color="#ffffff" hoverColor="#005a99" />
           </button>
         </div>

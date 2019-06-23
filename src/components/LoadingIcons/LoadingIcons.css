@@ -6,7 +6,7 @@
   text-align: center;
   -webkit-animation: jo-chasingIconsRotate 2s infinite linear;
           animation: jo-chasingIconsRotate 2s infinite linear; }
-  .jo-chasing-icons .prompt-type-button.jo-chasing-icon {
+  .jo-chasing-icons .jw-button.jo-chasing-icon {
     width: 30%;
     height: 30%;
     display: inline-block;
@@ -15,7 +15,7 @@
     border-radius: 100%;
     -webkit-animation: jo-chasingIconsBounce 2s infinite ease-in-out;
             animation: jo-chasingIconsBounce 2s infinite ease-in-out; }
-  .jo-chasing-icons .prompt-type-button.jo-chasing-icon.jo-icon-2 {
+  .jo-chasing-icons .jw-button.jo-chasing-icon.jo-icon-2 {
     top: auto;
     bottom: 0;
     -webkit-animation-delay: -1s;

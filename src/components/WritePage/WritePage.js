@@ -2,8 +2,9 @@ import React, {useState,useEffect} from 'react'
 import {connect} from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import './WritePage.css'
+import './WritePage.scss'
 import {saveWriting} from '../../store/actions/userActions'
+import Button from '../ui/Button/Button';
 
 const WritePage = (props) => {
   
@@ -54,7 +55,13 @@ const WritePage = (props) => {
   return (
     <div className="write-page">
       <textarea className="write-textarea" onChange={handleTextContentChange} value={textContent} datapieceid={pieceID} />
-      <button className="save-prompt" onClick={saveWriting}>Save</button>
+      <Button
+        className="save-prompt"
+        onClick={saveWriting}
+        size="large"
+        circle={true}
+      />
+      {/* <button className="jw-button save-prompt" onClick={saveWriting}>SAVE</button> */}
     </div>
   )
 }

@@ -7,22 +7,11 @@ export const signIn = (credentials, signInMethod=null) => {
         const googleProvider = new firebase.auth.GoogleAuthProvider()
         console.log('GOOGLE LOGIN')
         firebase.auth().signInWithPopup(googleProvider)
-        .then(function(result) {
+        .then((result)=>{
           dispatch({ type: 'LOGIN_SUCCESS' });
         })
-        .catch(function(error) {
+        .catch((error)=>{
           dispatch({ type: 'LOGIN_ERROR', error});
-        })
-        return null
-      case 'facebook':
-        const facebookProvider = new firebase.auth.FacebookAuthProvider()
-        console.log('FACEBOOK LOGIN')
-        firebase.auth().signInWithPopup(facebookProvider)
-        .then(function(result) {
-          dispatch({ type: 'LOGIN_SUCCESS' })
-        })
-        .catch(function(error) {
-          dispatch({ type: 'LOGIN_ERROR', error})
         })
         return null
       default:
