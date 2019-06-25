@@ -3,6 +3,7 @@ button.jw-button {
   align-items: center;
   justify-content: center;
   color: #fff;
+  background: rgb(144, 70, 247);
   background: linear-gradient(20deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   border-radius: 30px;
   border: none;
@@ -13,32 +14,50 @@ button.jw-button {
   padding: 0 20px;
   font-size: 16px;
   cursor: pointer;
-  -webkit-transition: border-color .3s ease; /* Safari */
-  transition: border-color .3s ease;
+  -webkit-transition: border-color .3s ease, background .5s ease-in-out; /* Safari */
+  transition: border-color .3s ease, background .5s ease-in-out;
+
+
+  &.delete-button {
+    background: rgb(183, 36, 65);
+    background: linear-gradient(20deg, rgb(183, 36, 65) 0%, rgba(252,70,107,1) 100%);
+  }
 
   &.save-prompt {
-    background: rgb(34,34,35);
-    background: linear-gradient(32deg, rgba(34,34,35,1) 0%, rgba(64,64,66,1) 100%);
     .button-icon {
-      opacity: 0.7;
+      opacity: 0.8;
       svg {
         path {
-          fill: #1a1a1b;
+          fill: #fff;
 
         }
       }
       
     }
     &.inactive {      
-      
+      background: rgb(34,34,35);
+      background: linear-gradient(32deg, rgba(34,34,35,1) 0%, rgba(64,64,66,1) 100%);
+      .button-icon {
+        svg {
+          path {
+            fill: #1b1b1b;
+  
+          }
+        }
+      }
     }
     &.active {
-      background: linear-gradient(20deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
       .button-icon {
         opacity: 1;
       }
     }
    
+  }
+
+  &.small {
+    height: 40px;
+    border-radius: 20px;
+    font-size: 16px;
   }
 
   &.large {
@@ -52,6 +71,9 @@ button.jw-button {
     padding: 0px;
     &.large {
       width: 70px;
+    }
+    &.small {
+      width: 40px;
     }
   }
   &:hover {

@@ -3,21 +3,28 @@ import './Button.scss'
 
 const Button = (props) => {
   
-  const {type,size,text,onClick,className,circle} = props
+  const {type,size,text,onClick,className,circle,status,itemID} = props
 
   let buttonClass = 'jw-button'
   if (className) buttonClass += ' ' + className
   if (size === 'large' ) buttonClass += ' large'
+  else if (size === 'small' ) buttonClass += ' small'
   if (circle) buttonClass += ' circle-button'
-  
+  if (status === 'inactive') buttonClass += ' inactive'
+  if (type === 'delete') buttonClass += 'delete-button'
+
+  const onButtonClick = () => {
+    if (onClick) onClick(itemID)
+  }
+
   return (
-    <button className={buttonClass} onClick={onClick}>
+    <button className={buttonClass} onClick={onButtonClick} dataitemid={itemID}>
       {text &&
         <span className="button-text">{text}</span>
       }
       <div className="button-icon">
         <svg 
-          ariaHidden="true" 
+          aria-hidden="true" 
           focusable="false" 
           className="save-icon" 
           role="img" 

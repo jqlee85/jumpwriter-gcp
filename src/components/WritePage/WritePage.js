@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import './WritePage.scss'
 import {saveWriting} from '../../store/actions/userActions'
-import Button from '../ui/Button/Button';
+import Button from '../ui/Button/Button'
 
 const WritePage = (props) => {
   
@@ -28,8 +28,11 @@ const WritePage = (props) => {
     }
   },[props.piece])
 
+  const [buttonStatus, setButtonStatus] = useState('inactive')
+
   const handleTextContentChange = (e) => {
     setTextContent(e.target.value)
+    if (e.target.value.length > 0) setButtonStatus('active')
   }
 
   const getWriting = () => {
@@ -60,6 +63,7 @@ const WritePage = (props) => {
         onClick={saveWriting}
         size="large"
         circle={true}
+        status={buttonStatus}
       />
       {/* <button className="jw-button save-prompt" onClick={saveWriting}>SAVE</button> */}
     </div>

@@ -2,7 +2,7 @@
 export const saveWriting = (writing, pieceID=null, prompt=null) => {
   
   return (dispatch, getState, {getFirestore}) => {
-    // const firebase = getFirebase();
+    
     const firestore = getFirestore()
     const authorId = getState().firebase.auth.uid;
     
@@ -42,18 +42,31 @@ export const saveWriting = (writing, pieceID=null, prompt=null) => {
       })
     }
     
-
-   
-  // TODO Call cloud function to save writing
-  // * create piece if no id
-  // * update piece if there is an id
-  // * move previous version of piece to PieceHistory collection
-
-    // firebase.auth().signOut().then(() => {
-    //   dispatch({ type: 'SAVE_SUCCESS' })
-    // });
   }
 
+}
+
+export const deletePiece = (pieceID=null) => {
   
+  return (dispatch, getState, {getFirestore}) => {
+    const firestore = getFirestore()
+    console.log('action called')
+    console.log('pieceID:',pieceID)
+
+    if (pieceID){
+      console.log('PIECE ID EXISTS...',pieceID)
+
+      firestore.collection('Pieces').doc(pieceID).delete()
+        .then((response)=>{
+          console.log(response)
+          dispatch({ 
+            type: 'DELETE_PIECE_SUCCESS',
+            payload: response
+          })
+        }).catch(err=>{
+          dispatch({type: 'DELETE_PIECE_ERROR' }, err)
+        })
+    }
+  }
 
 }
