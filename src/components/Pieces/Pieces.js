@@ -11,9 +11,15 @@ const Pieces = (props) => {
     
   const {pieces} = props
 
-  const deletePiece = (pieceID) => {
+  const deletePiece = (pieceID,pieceTitle) => {
     console.log('delete ',pieceID)
-    props.deletePiece(pieceID)
+    if ( typeof(pieceTitle) === 'undefined' ) pieceTitle = 'this piece'
+    if( window.confirm('Are you sure you want to delete '+pieceTitle+'?') ){
+      console.log('DELETE CONFIRMED')
+      props.deletePiece(pieceID)
+    }
+    // alert('Are you sure you want to delete '+pieceTitle+'?')
+    // props.deletePiece(pieceID)
   }
 
   return (
@@ -22,30 +28,37 @@ const Pieces = (props) => {
       {pieces && Object.keys(pieces).length > 0 && 
         Object.keys(pieces).map((pieceID)=>{
           let piece = pieces[pieceID]
-          console.log('piece = ',piece)
-          return(
-            <div className="list-piece" datapieceid={pieceID} key={pieceID}>
-              <h3>{piece.title}</h3>
-              <p>{piece.content}</p>
-              <Button
-                  className="delete-button"
-                  // onClick={saveWriting}
-                  size="small"
-                  circle={true}
-                  // status={buttonStatus}
-                  itemID={pieceID}
-                  onClick={deletePiece}
-              />
-              <Link to={'/writing/'+pieceID}>
+          if (piece) {
+            return(
+              <div className="list-piece" datapieceid={pieceID} key={pieceID}>
+                <h3>{piece.title}</h3>
+                <p>{piece.content}</p>
                 <Button
-                  className="edit-prompt"
-                  circle={true}
+                    className="delete-button"
+                    // onClick={saveWriting}
+                    size="small"
+                    circle={true}
+                    // status={buttonStatus}
+                    itemID={pieceID}
+                    onClick={()=>{deletePiece(pieceID,piece.title)}}
+                    // onClick={() => {}
                 />
-              </Link>
-
-              
-            </div>
-          )
+                <Link to={'/writing/'+pieceID}>
+                  <Button
+                    className="edit-prompt"
+                    circle={true}
+                  />
+                </Link>
+  
+                
+              </div>
+            )
+          } else {
+            return null
+          }
+          
+          
+          
         })
       }
     </div>

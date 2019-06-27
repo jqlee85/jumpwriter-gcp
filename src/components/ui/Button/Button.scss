@@ -16,8 +16,7 @@ button.jw-button {
   cursor: pointer;
   -webkit-transition: border-color .3s ease, background .5s ease-in-out; /* Safari */
   transition: border-color .3s ease, background .5s ease-in-out;
-
-
+  
   &.delete-button {
     background: rgb(183, 36, 65);
     background: linear-gradient(20deg, rgb(183, 36, 65) 0%, rgba(252,70,107,1) 100%);
@@ -29,7 +28,6 @@ button.jw-button {
       svg {
         path {
           fill: #fff;
-
         }
       }
       
@@ -41,7 +39,6 @@ button.jw-button {
         svg {
           path {
             fill: #1b1b1b;
-  
           }
         }
       }
@@ -58,12 +55,20 @@ button.jw-button {
     height: 40px;
     border-radius: 20px;
     font-size: 16px;
+    .button-icon {
+      width: 15px;
+      height: 15px;
+    }
   }
 
   &.large {
     height: 70px;
     border-radius: 35px;
     font-size: 24px;
+    .button-icon {
+      width: 25px;
+      height: 25px;
+    }
   }
 
   &.circle-button {
@@ -77,7 +82,6 @@ button.jw-button {
     }
   }
   &:hover {
-    // background: linear-gradient(20deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     span {
       color: #fafafa;
     }
@@ -104,9 +108,9 @@ button.jw-button {
     margin-right: 10px;
   }
 
-  .save-icon {
-    width: 25px;
-    height: 25px;
+  .button-icon {
+    width: 20px;
+    height: 20px;
   }
 
 }
