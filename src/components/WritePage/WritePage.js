@@ -41,11 +41,13 @@ const WritePage = (props) => {
 
   const saveWriting = (e) => {
     
+
+
     // if not logged in, pop up login/register prompt
     if (props.auth.uid) {
       console.log('logged in, do save')
       // console.log('e.target',e.target)
-      props.saveWriting(textContent,pieceID)
+      props.saveWriting(textContent,pieceID,props.prompt.type,props.prompt.data.text)
 
     } else {
       console.log('not logged in, display login form and message')
@@ -79,12 +81,13 @@ const mapStateToProps = (state,ownProps) => {
     auth: state.firebase.auth,
     authError: state.auth.authError,
     user: state.user,
+    prompt: state.prompt
   }
 }
 
 const mapDispatchToProps = (dispatch)=> {
   return {
-    saveWriting: (writing, pieceID) => dispatch(saveWriting(writing, pieceID))
+    saveWriting: (writing, pieceID, promptType, promptContent) => dispatch(saveWriting(writing, pieceID, promptType, promptContent))
   }
 }
 

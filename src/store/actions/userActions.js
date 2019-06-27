@@ -1,5 +1,5 @@
 
-export const saveWriting = (writing, pieceID=null, prompt=null) => {
+export const saveWriting = (writing, pieceID=null, promptType=null, promptContent=null) => {
   
   return (dispatch, getState, {getFirestore}) => {
     
@@ -26,10 +26,15 @@ export const saveWriting = (writing, pieceID=null, prompt=null) => {
       })
     } else {
       // If no existing piece, create a new one
+      
+      let title = (promptType === 'text') ? promptContent : null
+
       firestore.collection('Pieces').add({
         content: writing,
         uid: authorId,
-        prompt: prompt,
+        promptType: promptType,
+        prompt: promptContent,
+        title: title,
         createdAt: new Date()
       }).then((response) => {
         console.log(response)
