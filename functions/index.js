@@ -8,50 +8,68 @@ const firestore = new Firestore({
   projectId: 'jumpwriter'
 });
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
-// Take the text parameter passed to this HTTP endpoint and insert it into the
-// Realtime Database under the path /messages/:pushId/original
-exports.getPieces = functions.https.onCall((data, context) => {
+exports.getPrompt = functions.https.onCall((data, context) => {
   
   console.log('data',data)
   console.log('context.auth',context.auth)
 
-  // Message text passed from the client.
-  // Authentication / user information is automatically added to the request.
-  if ( !context.auth ) {
-    throw new functions.https.HttpsError('failed-precondition', 'The function must be called while authenticated.');
-  } else {
+  const authenticated = context.auth
+  const uid = authenticated ? context.auth.uid : false
 
-    const uid = context.auth.uid
-    // const name = context.auth.token.name || null
-    // const email = context.auth.token.email || null  
+  switch(data.promptType) {
 
-    // const db = admin.firestore()
-    const piecesRef = firestore.collection('Pieces').where('uid', '==', uid)
-    // .where("capital", "==", true)
-
-    return piecesRef.get()
-    .then((querySnapshot) => {
-      let theData = []  
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.data().title, " => ", doc.data());
-        console.log('DOC',doc)
-        theData.push({id: doc.id,data:doc.data()})
-      });
-      console.log('theData is',theData)
-      return(theData)
-    })
-    .catch((error) => {
-      throw new functions.https.HttpsError('invalid-data', 'No data was found.');
-    })
+    case 'text':
+      return Promise.resolve(
+        'this should be prompt text'
+      ).then((response)=>{
+        return {
+          data: response,
+          status: 'loaded'
+        }
+      }).catch((error)=>{
+        throw new functions.https.HttpsError('unknown', 'Error getting text prompt')
+      })
+    case 'random image':
+      return Promise.resolve(
+        'this should be an image prompt'
+      ).then((response)=>{
+        return {
+          data: response,
+          status: 'loaded'
+        }
+      }).catch((error)=>{
+        throw new functions.https.HttpsError('unknown', 'Error getting image prompt')
+      })
+    default:
+      return new Promise.resolve(
+      ).then((response)=>{
+        throw new functions.https.HttpsError('unknown', 'No prompt type specified')
+      }).catch((error)=>{
+        throw new functions.https.HttpsError('unknown', 'No prompt type specified')
+      })
 
   }
+
+    // const db = admin.firestore()
+    // const piecesRef = firestore.collection('Pieces').where('uid', '==', uid)
+    // // .where("capital", "==", true)
+
+    // return piecesRef.get()
+    // .then((querySnapshot) => {
+    //   let theData = []  
+    //   querySnapshot.forEach((doc) => {
+    //     // doc.data() is never undefined for query doc snapshots
+    //     // console.log(doc.data().title, " => ", doc.data());
+    //     console.log('DOC',doc)
+    //     theData.push({id: doc.id,data:doc.data()})
+    //   });
+    //   console.log('theData is',theData)
+    //   return(theData)
+    // })
+    // .catch((error) => {
+    //   throw new functions.https.HttpsError('invalid-data', 'No data was found.');
+    // })
+
+  
     
 })

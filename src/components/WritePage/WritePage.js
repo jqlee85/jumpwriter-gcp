@@ -41,8 +41,6 @@ const WritePage = (props) => {
 
   const saveWriting = (e) => {
     
-
-
     // if not logged in, pop up login/register prompt
     if (props.auth.uid) {
       console.log('logged in, do save')

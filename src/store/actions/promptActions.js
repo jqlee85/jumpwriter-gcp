@@ -1,4 +1,7 @@
 import "isomorphic-fetch";
+import firebaseApp from '../../config/firebase'
+
+let getPrompt = firebaseApp.functions().httpsCallable('getPrompt')
 
 /* Actions */
 
@@ -24,12 +27,15 @@ export function fetchImagePromptError(err){
 }
 
 export const fetchImagePrompt = () => (dispatch, getState) => {
-  dispatch(fetchImagePromptRequest());
-  return fetch("https://api.jumpwriter.com/wp-json/jumpwriter-theme/v1/image-prompt/")
-    .then(response => response.json())
-    .then(imagePrompt => dispatch(fetchImagePromptSuccess(imagePrompt)))
-    .catch(err => dispatch(fetchImagePromptError(err)));
-};
+  dispatch(fetchImagePromptRequest())
+  getPrompt({promptType:'random image'}).then((result)=>{
+    console.log('SUCCESSFUL Prompt RESULT:',result)
+    fetchImagePromptSuccess(result.data)
+  }).catch((error)=>{
+    console.error('Error loading data:',error)
+    dispatch(fetchImagePromptError(error))
+  })
+}
 
 /* Text Prompts */
 export function fetchTextPromptRequest(){
@@ -53,11 +59,13 @@ export function fetchTextPromptError(err){
 }
 
 export const fetchTextPrompt = () => (dispatch, getState) => {
-  dispatch(fetchTextPromptRequest());
-  
-  return fetch("https://api.jumpwriter.com/wp-json/jumpwriter-theme/v1/noun-verb-prompt/")
-    .then(response => response.json())
-    .then(textPrompt => dispatch(fetchTextPromptSuccess(textPrompt)))
-    .catch(err => dispatch(fetchTextPromptError(err)));
-};
+  dispatch(fetchTextPromptRequest())
+  getPrompt({promptType:'text'}).then((result)=>{
+    console.log('SUCCESSFUL Prompt RESULT:',result)
+    fetchTextPromptSuccess(result.data)
+  }).catch((error)=>{
+    console.error('Error loading data:',error)
+    dispatch(fetchTextPromptError(error))
+  })
+}
 
