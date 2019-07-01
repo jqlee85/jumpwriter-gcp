@@ -6,24 +6,19 @@ export const saveWriting = (writing, pieceID=null, prompt=null) => {
     const firestore = getFirestore()
     const authorId = getState().firebase.auth.uid;
     
-    console.log('action called')
-    console.log('writing:',writing)
-    console.log('pieceID:',pieceID)
-    console.log('prompt',prompt)
-
     if (pieceID){
       console.log('PIECE ID EXISTS...',pieceID)
       firestore.collection('Pieces').doc(pieceID).update({
         content: writing,
         updatedAt: new Date(),
       }).then((response)=>{
-        console.log(response)
         dispatch({ 
           type: 'UPDATE_PIECE_SUCCESS',
           payload: response
         })
-      }).catch(err=>{
-        dispatch({type: 'UPDATE_PIECE_ERROR' }, err)
+      }).catch(error=>{
+        console.error(error)
+        dispatch({type: 'UPDATE_PIECE_ERROR' }, error)
       })
     } else {
       // If no existing piece, create a new one
@@ -43,7 +38,6 @@ export const saveWriting = (writing, pieceID=null, prompt=null) => {
         title: title,
         createdAt: new Date()
       }).then((response) => {
-        console.log(response)
         dispatch({ 
           type: 'CREATE_PIECE_SUCCESS',
           payload: response
@@ -61,21 +55,16 @@ export const deletePiece = (pieceID=null) => {
   
   return (dispatch, getState, {getFirestore}) => {
     const firestore = getFirestore()
-    console.log('action called')
-    console.log('pieceID:',pieceID)
-
     if (pieceID){
-      console.log('PIECE ID EXISTS...',pieceID)
-
       firestore.collection('Pieces').doc(pieceID).delete()
         .then((response)=>{
-          console.log(response)
           dispatch({ 
             type: 'DELETE_PIECE_SUCCESS',
             payload: response
           })
-        }).catch(err=>{
-          dispatch({type: 'DELETE_PIECE_ERROR' }, err)
+        }).catch(error=>{
+          console.error(error)
+          dispatch({type: 'DELETE_PIECE_ERROR' }, error)
         })
     }
   }
