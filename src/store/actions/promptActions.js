@@ -29,8 +29,7 @@ export function fetchImagePromptError(err){
 export const fetchImagePrompt = () => (dispatch, getState) => {
   dispatch(fetchImagePromptRequest())
   getPrompt({promptType:'random image'}).then((result)=>{
-    console.log('SUCCESSFUL Prompt RESULT:',result)
-    fetchImagePromptSuccess(result.data)
+    dispatch(fetchImagePromptSuccess(result.data))
   }).catch((error)=>{
     console.error('Error loading data:',error)
     dispatch(fetchImagePromptError(error))
@@ -61,7 +60,6 @@ export function fetchTextPromptError(err){
 export const fetchTextPrompt = () => (dispatch, getState) => {
   dispatch(fetchTextPromptRequest())
   getPrompt({promptType:'text'}).then((result)=>{
-    console.log('SUCCESSFUL Prompt RESULT:',result)
     fetchTextPromptSuccess(result.data)
   }).catch((error)=>{
     console.error('Error loading data:',error)

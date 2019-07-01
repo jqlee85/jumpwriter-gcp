@@ -4,21 +4,20 @@ import LoadingIcons from '../LoadingIcons/LoadingIcons';
 
 const unsplashAppName = 'JumpWriter';
 
-class ImagePrompt extends Component {
+const ImagePrompt = (props) => {
 
-  render() {
-    return <div className="image-prompt-wrapper">
-      {this.props.prompt.status == 'requested' && <LoadingIcons />}
-      {this.props.prompt.status == 'received' &&
-        <div className="prompt-image">
-          <img src={this.props.prompt.data.imageSrc} alt={this.props.prompt.data.alt}/>
-          <div className="prompt-image-credit">
-            <p>Photo by {this.props.prompt.data.imageUserName} on <a href={`${this.props.prompt.data.imageUrl}?utm_source=${unsplashAppName}&utm_medium=referral&utm_campaign=api-credit`} target="_blank">Unsplash</a></p>
-          </div>
+  return <div className="image-prompt-wrapper">
+    {props.prompt.status == 'requested' && <LoadingIcons />}
+    {props.prompt.status == 'received' &&
+      <div className="prompt-image">
+        <img src={props.prompt.data.urls.small} alt={props.prompt.data.alt_description}/>
+        <div className="prompt-image-credit">
+          <p>Photo by {props.prompt.data.user.username} on <a href={`${props.prompt.data.urls.small}?utm_source=${unsplashAppName}&utm_medium=referral&utm_campaign=api-credit`} target="_blank">Unsplash</a></p>
         </div>
-      }
       </div>
-  }
+    }
+    </div>
+  
 }
 
 
