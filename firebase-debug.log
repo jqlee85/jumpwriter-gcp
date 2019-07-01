@@ -1,0 +1,64 @@
+[debug] [2019-07-01T04:24:09.510Z] ----------------------------------------------------------------------
+[debug] [2019-07-01T04:24:09.512Z] Command:       /Users/Jesse/.nvm/versions/node/v10.15.3/bin/node /Users/Jesse/.nvm/versions/node/v10.15.3/bin/firebase deploy --only functions
+[debug] [2019-07-01T04:24:09.512Z] CLI Version:   6.11.0
+[debug] [2019-07-01T04:24:09.512Z] Platform:      darwin
+[debug] [2019-07-01T04:24:09.512Z] Node Version:  v10.15.3
+[debug] [2019-07-01T04:24:09.513Z] Time:          Mon Jul 01 2019 00:24:09 GMT-0400 (Chile Standard Time)
+[debug] [2019-07-01T04:24:09.513Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-07-01T04:24:09.522Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-07-01T04:24:09.522Z] > authorizing via signed-in user
+[debug] [2019-07-01T04:24:09.522Z] [iam] checking project jumpwriter for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2019-07-01T04:24:09.524Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jumpwriter:testIamPermissions  
+
+[debug] [2019-07-01T04:24:10.655Z] <<< HTTP RESPONSE 200
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions.
+ Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+[info] 
+[info] === Deploying to 'jumpwriter'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2019-07-01T04:24:14.511Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "test": "jest"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.8",
+    "firebase-admin": "~7.0.0",
+    "firebase-functions": "^2.3.0",
+    "isomorphic-fetch": "^2.2.1",
+    "unsplash-js": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.1.6",
+    "jest": "^24.8.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-07-01T04:24:14.512Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/jumpwriter?view=CONSUMER_VIEW  
+ 
+[debug] [2019-07-01T04:24:14.512Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/jumpwriter?view=CONSUMER_VIEW  
+ 
+[debug] [2019-07-01T04:24:16.055Z] <<< HTTP RESPONSE 200
+[debug] [2019-07-01T04:24:16.147Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2019-07-01T04:24:16.148Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/jumpwriter  
+ 

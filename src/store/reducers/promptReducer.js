@@ -1,8 +1,6 @@
 // Prompt Reducer
 
 const promptState = {
-  imagePrompt: false,
-  textPrompt: false,
   status: false
 }
 

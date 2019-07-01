@@ -60,7 +60,7 @@ export function fetchTextPromptError(err){
 export const fetchTextPrompt = () => (dispatch, getState) => {
   dispatch(fetchTextPromptRequest())
   getPrompt({promptType:'text'}).then((result)=>{
-    fetchTextPromptSuccess(result.data)
+    dispatch(fetchTextPromptSuccess(result.data))
   }).catch((error)=>{
     console.error('Error loading data:',error)
     dispatch(fetchTextPromptError(error))

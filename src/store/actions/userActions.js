@@ -1,5 +1,5 @@
 
-export const saveWriting = (writing, pieceID=null, promptType=null, promptContent=null) => {
+export const saveWriting = (writing, pieceID=null, prompt=null) => {
   
   return (dispatch, getState, {getFirestore}) => {
     
@@ -9,6 +9,7 @@ export const saveWriting = (writing, pieceID=null, promptType=null, promptConten
     console.log('action called')
     console.log('writing:',writing)
     console.log('pieceID:',pieceID)
+    console.log('prompt',prompt)
 
     if (pieceID){
       console.log('PIECE ID EXISTS...',pieceID)
@@ -27,13 +28,18 @@ export const saveWriting = (writing, pieceID=null, promptType=null, promptConten
     } else {
       // If no existing piece, create a new one
       
-      let title = (promptType === 'text') ? promptContent : null
+      let title = (prompt.promptType === 'random three word text') ? prompt.promptContent : null
+      if (prompt.promptType === 'random unsplash image') title = prompt.promptContent.alt_description
+      let promptType = prompt.promptType || null
+      let promptContent = prompt.promptContent || null
+
 
       firestore.collection('Pieces').add({
         content: writing,
         uid: authorId,
         promptType: promptType,
-        prompt: promptContent,
+        promptContent: promptContent,
+        prompt: prompt,
         title: title,
         createdAt: new Date()
       }).then((response) => {

@@ -3,14 +3,15 @@ import './TextPrompt.css';
 import LoadingIcons from '../LoadingIcons/LoadingIcons';
 
 
-class TextPrompt extends Component {
+const TextPrompt = (props) => {
 
-  render() {
-    return <div className="text-prompt">
-      {this.props.prompt.status == 'requested' && <LoadingIcons />}
-      {this.props.prompt.status == 'received' && <h3>{this.props.prompt.data.text}</h3>}
-    </div>
-  }
+  const {prompt} = props
+
+  return <div className="text-prompt">
+    {prompt.status == 'requested' && <LoadingIcons />}
+    {prompt.status == 'received' && <h3>{prompt.data.promptContent}</h3>}
+  </div>
+  
 
 }
 

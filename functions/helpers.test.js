@@ -1,5 +1,5 @@
 const myMethods = require('./helpers')
-const {getArticle, getThreeWordPrompt, getAutoId} = myMethods
+const {getArticle, getThreeWordPrompt, getNewAutoId} = myMethods
 
 describe('getArticle()', () => {
 
@@ -60,10 +60,10 @@ describe('getThreeWordPrompt()', () => {
 
 })
 
-describe('getAutoId()', () => {
+describe('getNewAutoId()', () => {
 
   it('gets legitimate autoid of 20 chars', () => {
-    expect(getAutoId().length).toEqual(20)
+    expect(getNewAutoId().length).toEqual(20)
   })
 
 })

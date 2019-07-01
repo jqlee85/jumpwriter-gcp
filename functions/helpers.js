@@ -26,7 +26,7 @@ const getArticle = ( noun=false ) => {
 	else return 'a'
 }
 
-const getAutoId = () => {
+const getNewAutoId = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let autoId = ''
   for (let i = 0; i < 20; i++) {
@@ -37,7 +37,7 @@ const getAutoId = () => {
 
 // Exports
 module.exports =  {
-  getAutoId: getAutoId,
+  getNewAutoId: getNewAutoId,
   getArticle: getArticle,
   getThreeWordPrompt: getThreeWordPrompt
 }

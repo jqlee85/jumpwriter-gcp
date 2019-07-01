@@ -6,13 +6,15 @@ const unsplashAppName = 'JumpWriter';
 
 const ImagePrompt = (props) => {
 
+  const {prompt} = props
+
   return <div className="image-prompt-wrapper">
-    {props.prompt.status == 'requested' && <LoadingIcons />}
-    {props.prompt.status == 'received' &&
+    {prompt.status == 'requested' && <LoadingIcons />}
+    {prompt.status == 'received' &&
       <div className="prompt-image">
-        <img src={props.prompt.data.urls.small} alt={props.prompt.data.alt_description}/>
+        <img src={prompt.data.promptContent.urls.small} alt={prompt.data.promptContent.alt_description}/>
         <div className="prompt-image-credit">
-          <p>Photo by {props.prompt.data.user.username} on <a href={`${props.prompt.data.urls.small}?utm_source=${unsplashAppName}&utm_medium=referral&utm_campaign=api-credit`} target="_blank">Unsplash</a></p>
+          <p>Photo by {prompt.data.promptContent.user.username} on <a href={`${prompt.data.promptContent.urls.small}?utm_source=${unsplashAppName}&utm_medium=referral&utm_campaign=api-credit`} target="_blank">Unsplash</a></p>
         </div>
       </div>
     }

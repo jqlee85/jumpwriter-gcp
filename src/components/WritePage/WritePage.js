@@ -8,8 +8,6 @@ import Button from '../ui/Button/Button'
 
 const WritePage = (props) => {
   
-  // TODO get textContent from the document in firestore if pieceID is defined by the route
-  
   const [textContent, setTextContent] = useState('')
   const [pieceID, setPieceID] = useState(null)
   useEffect(()=>{
@@ -35,26 +33,14 @@ const WritePage = (props) => {
     if (e.target.value.length > 0) setButtonStatus('active')
   }
 
-  const getWriting = () => {
-
-  }
-
   const saveWriting = (e) => {
-    
-    // if not logged in, pop up login/register prompt
     if (props.auth.uid) {
-      console.log('logged in, do save')
-      // console.log('e.target',e.target)
-      props.saveWriting(textContent,pieceID,props.prompt.type,props.prompt.data.text)
-
+      props.saveWriting(textContent,pieceID,props.prompt.data)
     } else {
-      console.log('not logged in, display login form and message')
       props.showLoginOrSignup('Please log in or sign up to save your writing.')
     }
-
   }
 
-  console.log('PROPS',props)
   return (
     <div className="write-page">
       <textarea className="write-textarea" onChange={handleTextContentChange} value={textContent} datapieceid={pieceID} />
@@ -65,7 +51,6 @@ const WritePage = (props) => {
         circle={true}
         status={buttonStatus}
       />
-      {/* <button className="jw-button save-prompt" onClick={saveWriting}>SAVE</button> */}
     </div>
   )
 }
@@ -85,7 +70,7 @@ const mapStateToProps = (state,ownProps) => {
 
 const mapDispatchToProps = (dispatch)=> {
   return {
-    saveWriting: (writing, pieceID, promptType, promptContent) => dispatch(saveWriting(writing, pieceID, promptType, promptContent))
+    saveWriting: (writing, pieceID, prompt) => dispatch(saveWriting(writing, pieceID, prompt))
   }
 }
 
