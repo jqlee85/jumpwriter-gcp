@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 button.jw-button {
   display: flex;
   align-items: center;
@@ -67,9 +69,24 @@ button.jw-button {
     height: 70px;
     border-radius: 35px;
     font-size: 24px;
+    &.circle-button {
+      
+     
+    }
     .button-icon {
       width: 25px;
       height: 25px;
+    }
+    @include breakpoint(mobileonly){
+      height: 50px;
+      border-radius: 25px;
+      font-size: 16px;
+
+      .button-icon {
+        width: 20px;
+        height: 20px;
+      }
+      
     }
   }
 
@@ -78,6 +95,9 @@ button.jw-button {
     padding: 0px;
     &.large {
       width: 70px;
+      @include breakpoint(mobileonly){
+        width: 50px;
+      }
     }
     &.small {
       width: 40px;

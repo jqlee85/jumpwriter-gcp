@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import {deletePiece} from '../../store/actions/userActions'
 import {Link} from 'react-router-dom'
-import './Pieces.css'
+import './Pieces.scss'
 import Button from '../ui/Button/Button';
 import DeleteIcon from '../icons/DeleteIcon/DeleteIcon'
 import EditIcon from '../icons/EditIcon/EditIcon'
@@ -35,21 +35,23 @@ const Pieces = (props) => {
               <div className="list-piece" datapieceid={pieceID} key={pieceID}>
                 <h3>{piece.title}</h3>
                 <p>{piece.content}</p>
-                <Button
-                    className="delete-button"
-                    icon={<DeleteIcon/>}
-                    size="small"
-                    circle={true}
-                    itemID={pieceID}
-                    onClick={()=>{deletePiece(pieceID,piece.title)}}
-                />
-                <Link to={'/writing/'+pieceID}>
+                <div className="piece-actions">
                   <Button
-                    className="edit-prompt"
-                    circle={true}
-                    icon={<EditIcon/>}
+                      className="delete-button"
+                      icon={<DeleteIcon/>}
+                      size="small"
+                      circle={true}
+                      itemID={pieceID}
+                      onClick={()=>{deletePiece(pieceID,piece.title)}}
                   />
-                </Link>
+                  <Link to={'/writing/'+pieceID}>
+                    <Button
+                      className="edit-prompt"
+                      circle={true}
+                      icon={<EditIcon/>}
+                    />
+                  </Link>
+                </div>
   
                 
               </div>

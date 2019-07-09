@@ -1,0 +1,22 @@
+.pieces {
+    box-sizing: border-box;
+    padding: 60px;
+}
+
+.list-piece {
+    position: relative;
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 3em auto;
+    .piece-actions {
+        position: absolute;
+        bottom: 0px;
+        right: -25px;
+        width: 100%;
+        transform: translateY(40%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
