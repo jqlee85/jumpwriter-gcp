@@ -6,6 +6,8 @@ import {deletePiece} from '../../store/actions/userActions'
 import {Link} from 'react-router-dom'
 import './Pieces.css'
 import Button from '../ui/Button/Button';
+import DeleteIcon from '../icons/DeleteIcon/DeleteIcon'
+import EditIcon from '../icons/EditIcon/EditIcon'
 
 const Pieces = (props) => {
     
@@ -35,18 +37,17 @@ const Pieces = (props) => {
                 <p>{piece.content}</p>
                 <Button
                     className="delete-button"
-                    // onClick={saveWriting}
+                    icon={<DeleteIcon/>}
                     size="small"
                     circle={true}
-                    // status={buttonStatus}
                     itemID={pieceID}
                     onClick={()=>{deletePiece(pieceID,piece.title)}}
-                    // onClick={() => {}
                 />
                 <Link to={'/writing/'+pieceID}>
                   <Button
                     className="edit-prompt"
                     circle={true}
+                    icon={<EditIcon/>}
                   />
                 </Link>
   

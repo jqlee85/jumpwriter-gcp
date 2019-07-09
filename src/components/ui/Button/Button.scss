@@ -22,6 +22,8 @@ button.jw-button {
     background: linear-gradient(20deg, rgb(183, 36, 65) 0%, rgba(252,70,107,1) 100%);
   }
 
+
+
   &.save-prompt {
     .button-icon {
       opacity: 0.8;
@@ -56,8 +58,8 @@ button.jw-button {
     border-radius: 20px;
     font-size: 16px;
     .button-icon {
-      width: 15px;
-      height: 15px;
+      width: 18px;
+      height: 18px;
     }
   }
 
@@ -109,8 +111,18 @@ button.jw-button {
   }
 
   .button-icon {
+    position: relative;
     width: 20px;
     height: 20px;
+    svg {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      g {
+        position: relative;
+      }
+    }
   }
 
 }
