@@ -1,27 +1,26 @@
-import React, {useState,useEffect} from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import {deletePiece} from '../../store/actions/userActions'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import './Pieces.scss'
 import Button from '../ui/Button/Button';
 import DeleteIcon from '../icons/DeleteIcon/DeleteIcon'
 import EditIcon from '../icons/EditIcon/EditIcon'
 
 const Pieces = (props) => {
-    
+  
+  if (!props.auth.uid) return <Redirect to='/' /> 
+  
   const {pieces} = props
 
   const deletePiece = (pieceID,pieceTitle) => {
-    console.log('delete ',pieceID)
     if ( typeof(pieceTitle) === 'undefined' ) pieceTitle = 'this piece'
     if( window.confirm('Are you sure you want to delete '+pieceTitle+'?') ){
       console.log('DELETE CONFIRMED')
       props.deletePiece(pieceID)
     }
-    // alert('Are you sure you want to delete '+pieceTitle+'?')
-    // props.deletePiece(pieceID)
   }
 
   return (
@@ -88,10 +87,13 @@ const mapDispatchToProps = (dispatch)=> {
 
 export default compose(
   connect(mapStateToProps,mapDispatchToProps),
-  firestoreConnect( props => { return ([{
-      collection: 'Pieces',
-      where: [['uid', '==', props.auth.uid]],
-    }])
+  firestoreConnect( (props) => { 
+    if (props.auth.uid)
+      return ([{
+        collection: 'Pieces',
+        where: [['uid', '==', props.auth.uid]],
+      }])
+    else return ([])
   })
 )(Pieces)
 

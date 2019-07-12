@@ -32,11 +32,10 @@ export const signIn = (credentials, signInMethod=null) => {
 
 export const signOut = () => {
   return (dispatch, getState, {getFirebase}) => {
-    const firebase = getFirebase();
-
+    const firebase = getFirebase()
     firebase.auth().signOut().then(() => {
-      dispatch({ type: 'SIGNOUT_SUCCESS' })
-    });
+      dispatch({type: 'SIGNOUT_SUCCESS'})
+    })
   }
 }
 
@@ -45,13 +44,9 @@ export const signUp = (newUser, signUpMethod=null) => {
     const firebase = getFirebase()
     const firestore = getFirestore()
     
-    console.log('newUser',newUser)
-    console.log('signUpMethod',signUpMethod)
-
     switch(signUpMethod) {
       case 'google':
         const googleProvider = new firebase.auth.GoogleAuthProvider()
-        console.log('GOOGLE SIGNUP')
         firebase.auth().signInWithPopup(googleProvider)
         .then(function(result) {
           dispatch({ type: 'SIGNUP_SUCCESS' })
@@ -60,19 +55,7 @@ export const signUp = (newUser, signUpMethod=null) => {
           dispatch({ type: 'SIGNUP_ERROR', error})
         })
         return null
-      case 'facebook':
-        const facebookProvider = new firebase.auth.FacebookAuthProvider()
-        console.log('FACEBOOK SIGNUP')
-        firebase.auth().signInWithPopup(facebookProvider)
-        .then(function(result) {
-          dispatch({ type: 'SIGNUP_SUCCESS' })
-        })
-        .catch(function(error) {
-          dispatch({ type: 'SIGNUP_ERROR', error})
-        })
-        return null
       default:
-        console.log('EMAIL SIGNUP')
         firebase.auth().createUserWithEmailAndPassword(
           newUser.email, 
           newUser.password

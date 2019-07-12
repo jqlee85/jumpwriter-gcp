@@ -17,8 +17,8 @@ const authReducer = ( state = initState, action) => {
         authError: null
       }
     case 'SIGNOUT_SUCCESS':
-    //TODO Redirect home on signout  
-    return state;
+      //TODO Redirect home on signout  
+      return state
     case 'SIGNUP_SUCCESS':
       return {
         ...state,
