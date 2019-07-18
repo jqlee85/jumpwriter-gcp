@@ -4,6 +4,16 @@ JumpWriter is built and maintained by [JumpOff](https://jumpoff.io), more inform
 
 It is built with React, Redux, and React-Redux-Firebase, for the client-side app, and uses Google Firebase as a backend.
 
+## TODOs
+
+* prefetch random prompt and random image
+* pagination
+* redirect on piece creation
+* acct mgmt page
+* daily streak
+* publish functionality
+* share buttons
+
 ## Create React App Info
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
