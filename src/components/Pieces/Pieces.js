@@ -18,7 +18,6 @@ const Pieces = (props) => {
   const deletePiece = (pieceID,pieceTitle) => {
     if ( typeof(pieceTitle) === 'undefined' ) pieceTitle = 'this piece'
     if( window.confirm('Are you sure you want to delete '+pieceTitle+'?') ){
-      console.log('DELETE CONFIRMED')
       props.deletePiece(pieceID)
     }
   }

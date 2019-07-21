@@ -67,3 +67,8 @@ export const fetchTextPrompt = () => (dispatch, getState) => {
   })
 }
 
+export const clearPromptData = () => {
+  return {
+    type: 'CLEAR_PROMPT_DATA'
+  }
+}

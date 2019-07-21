@@ -3,19 +3,32 @@ const initState = {
   updatePieceStatus: null,
   updatedpieceID: null,
   createPieceStatus: null,
-  createdpieceID: null,
+  createdPieceID: null,
   data:null,
   status:null
 }
 
 const userReducer = ( state = initState, action) => {
   switch (action.type) {
+    case 'CLEAR_PIECE_DATA':
+      console.log('CLEAR_PIECE_DATA')
+      return { 
+        ...state, 
+        pieceID: null,
+      }
+    case 'CLEAR_CREATED_PIECE':
+        console.log('CLEAR_CREATED_PIECE')
+        return { 
+          ...state, 
+          createPieceStatus: null,
+          createdPieceID: null,
+        }
     case 'CREATE_PIECE_SUCCESS':
       console.log('CREATE_PIECE_SUCCESS')
       return { 
         ...state, 
         createPieceStatus: 'success',
-        pieceID: action.payload.id,
+        createdPieceID: action.payload.id,
         data: action.payload, 
         status: 'received' 
       }

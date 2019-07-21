@@ -2,7 +2,6 @@ import React, {useState,useEffect} from 'react'
 import {connect} from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import {Redirect} from 'react-router-dom'
 import './WritePage.scss'
 import {saveWriting} from '../../store/actions/userActions'
 import Button from '../ui/Button/Button'
@@ -11,14 +10,10 @@ const WritePage = (props) => {
   
   const [textContent, setTextContent] = useState('')
   const [pieceID, setPieceID] = useState(null)
-  const [redirect,setRedirect] = useState(false)
   
   useEffect(()=>{
     if (!props.pieceID && props.user.pieceID) {
       setPieceID(props.user.pieceID)
-      setRedirect(true)
-    } else {
-      setRedirect(false)
     }
   },[props.user.pieceID])
 
@@ -33,8 +28,6 @@ const WritePage = (props) => {
   },[props.piece])
 
   const [buttonStatus, setButtonStatus] = useState('inactive')
-
-  if (redirect && pieceID) return <Redirect to={'/writing/'+pieceID} />
 
   const handleTextContentChange = (e) => {
     setTextContent(e.target.value)
@@ -65,7 +58,7 @@ const WritePage = (props) => {
 
 const mapStateToProps = (state,ownProps) => {
   const id = ownProps.pieceID;
-  const pieces = state.firestore.data.Pieces;
+  const pieces = state.firestore.data.Pieces
   const piece = pieces ? pieces[id] : null
   return {
     piece: piece,

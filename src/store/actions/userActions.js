@@ -1,4 +1,16 @@
 
+export const clearPieceData = () => {
+  return { 
+    type: 'CLEAR_PIECE_DATA'
+  }
+}
+
+export const clearCreatedPiece = () => {
+  return { 
+    type: 'CLEAR_CREATED_PIECE'
+  }
+}
+
 export const saveWriting = (writing, pieceID=null, prompt=null) => {
   
   return (dispatch, getState, {getFirestore}) => {

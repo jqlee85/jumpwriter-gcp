@@ -19,33 +19,29 @@ class SignIn extends Component {
   }
 
   handleEmailLogin = (e) => {
-    console.log('handleSubmit')
     e.preventDefault()
     this.props.signIn(this.state)
   }
   
   handleGoogleLogin = (e) => {
-    console.log('handleGoogleSignUp')
     e.preventDefault()
     this.props.signIn(this.state, 'google')
   }
 
   handleEmailSignup = (e) => {
-    console.log('handleSubmit')
     e.preventDefault();
     this.props.signUp(this.state);
   }
 
   handleGoogleSignup = (e) => {
     e.preventDefault()
-    console.log('handleGoogleSignUp')
     this.props.signUp(this.state, 'google');
   }
 
   render() {
 
     const {authError,message} = this.props
-    console.log('message=>',message)
+
     return (
       <div className="signin-container">
         {message && 

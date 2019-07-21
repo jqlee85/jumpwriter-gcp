@@ -1,4 +1,5 @@
 import Write from "./components/Write/Write";
+import Edit from "./components/Edit/Edit";
 import About from "./components/About/About";
 import Nouns from "./components/Nouns/Nouns";
 import Pieces from "./components/Pieces/Pieces";
@@ -41,7 +42,7 @@ const routes = [
   },
   {
     path: '/writing/:pieceID',
-    component: Write,
+    component: Edit,
   }
 ];
 

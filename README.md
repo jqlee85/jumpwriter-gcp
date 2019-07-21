@@ -8,7 +8,6 @@ It is built with React, Redux, and React-Redux-Firebase, for the client-side app
 
 * prefetch random prompt and random image
 * pagination
-* redirect on piece creation
 * acct mgmt page
 * daily streak
 * publish functionality
