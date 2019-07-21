@@ -1,10 +1,9 @@
-import React, {useState,useEffect} from 'react';
-import Prompt from '../Prompt/Prompt';
-import WritePage from '../WritePage/WritePage';
-import {Link} from 'react-router-dom';
+import React, {useState,useEffect} from 'react'
+import Prompt from '../Prompt/Prompt'
+import WritePage from '../WritePage/WritePage'
 
 export default function Write(props) {
-  
+ 
   const [pieceID,setPieceID] = useState(null)
   useEffect(()=>{
     setPieceID(props.match.params.pieceID)
