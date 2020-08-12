@@ -18,7 +18,7 @@
     "redux": "^3.7.2",
     "redux-firestore": "^0.8.0",
     "redux-thunk": "^2.3.0",
-    "serialize-javascript": "^1.6.1",
+    "serialize-javascript": "^3.1.0",
     "serve-favicon": "^2.5.0",
     "source-map-support": "^0.5.11"
   },
